@@ -1,0 +1,256 @@
+/* -----------------------------------------------------------------------
+
+	mDocs - MooTools Style
+	
+	This style is based off of the MooTools documentation style:
+	Copyright (c) 2006-2008 Valerio Proietti, http://mad4milk.net.
+	
+	Additional code was based off of the MooDocs style:
+	Copyright (c) 2009 Jose Prado, http://pradador.com.
+	
+	And lastly, I, Jay Williams, modified the styles for relative
+	width and intergrated it with mDocs.
+
+----------------------------------------------------------------------- */
+
+
+body {
+	background-color: #F4F5F5;
+	color: #313334;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 75%;
+	line-height: 1.5;
+	margin: 0;
+	padding: 0;
+}
+
+/* @group Main */
+
+a:link, a:visited {
+	color: #6b7b95;
+}
+
+a:hover, a:active {
+	color: #e79d35;
+}
+
+a.selected:link, a.selected:visited {
+	color: #222;
+}
+
+em {
+	font-style: normal;
+	color: #686c70;
+}
+
+p {
+	font-size: 1.2em;
+}
+
+pre {
+	background: #fff;
+	border-top: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+	padding: 5px 7px;
+	overflow: auto;
+	font-size: 12px;
+}
+
+pre, code, tt {
+	line-height: 1.5;
+	font-family: 'andale mono', 'lucida console', monospace;
+}
+
+ul, ol {
+	margin: 0 1.5em 1.5em 1.5em;
+	padding: 0;
+	font-size: 1.03em;
+}
+
+ul {
+	list-style-type: square;
+}
+
+#container {
+	background-color: #F4F5F5;
+	margin: 0px auto;
+	padding-top: 36px;
+	/*width: 950px;*/
+	min-width: 850px;
+	max-width: 1200px;
+}
+
+
+
+/* @end */
+
+/* @group Menu */
+
+#menu {
+	float: left;
+	/*width: 150px;*/
+	width: 15%;
+	margin-right: 10px;
+	font-size: 1.1em;
+	padding-left: 10px;
+}
+
+#menu a, #toc a {
+	display: block;
+}
+
+#menu p, #menu div {
+	text-align: right;
+}
+
+#menu h4 {
+	border-bottom: 1px solid #ddd;
+	font-weight: bold;
+	font-size: 1.2em;
+	margin: 10px 0;
+	padding-bottom: 2px;
+}
+
+
+
+/* @end */
+
+/* @group Doc */
+
+#doc {
+	float: left;
+	/*width: 590px;*/
+	width: 61%;
+	padding: 0 24px 0 25px;
+	margin: 0 10px 3em 14px;
+	border-left: 1px solid rgb(221, 221, 221);
+	border-right: 1px solid rgb(221, 221, 221);
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #313334;
+	font-weight: bold;
+	margin-bottom: .5em;
+	margin-top: .5em;
+}
+
+#doc h1 {
+	margin: 0 0 15px 0;
+	padding: 0 0 9px 0;
+	font-size: 2.5em;
+	color: #c17878;
+	text-decoration: none;
+}
+
+#doc h2 {
+	color: #78ba91;
+	text-decoration: none;
+	font-size: 2em;
+	margin-bottom: 0.75em;
+}
+
+#doc h1, #doc h2 {
+	border-bottom: 1px solid #ddd;
+}
+
+h1 a:link, h1 a:visited {
+	color: #c17878;
+	text-decoration: none;
+}
+
+h2 a:link, h2 a:visited {
+	color: #78ba91;
+	text-decoration: none;
+}
+
+#doc h3 {
+	font-size: 1.5em;
+}
+
+
+#doc h4 {
+	font-size: 1.2em;
+}
+
+#doc h5 {
+	font-size: 1em;
+}
+
+
+
+/* @end */
+
+/* @group geshi */
+
+.kw1 {
+	color: #1b609a;
+}
+
+.kw2 {
+	color: #9a6f1b;
+}
+
+.me1 {
+	color: #666;
+}
+
+.kw3, .re0, .sc1 {
+	color: #784e0c;
+}
+
+.br0 {
+	color: #444;
+}
+
+.st0 {
+	color: #489a1b;
+}
+
+.co1, .coMULTI {
+	color: #888;
+}
+
+.nu0 {
+	color: #70483d;
+}
+
+/* @end */
+
+/* @group TOC */
+
+#toc {
+	float: left;
+}
+
+#toc h4 {
+	padding: 10px 0;
+	margin: 0;
+	font-weight: bold;
+	font-size: 1.2em;
+	height: 1.25em;
+	line-height: 1.25;
+	color: rgb(49, 51, 52);
+}
+
+#toc p, #toc div{
+	padding: 0;
+	margin: 0;
+}
+
+
+
+/* @end */
+
+/* @group Footer */
+
+#footer {
+	clear: both;
+	margin-top: 30px;
+	text-align: right;
+	color:#666;
+	margin-bottom: 3em;
+}
+
+
+
+/* @end */

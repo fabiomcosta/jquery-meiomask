@@ -33,6 +33,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+testing tag on git
+
 (function($){
 		
 	var isIphone = (window.orientation!=undefined);

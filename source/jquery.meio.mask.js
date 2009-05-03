@@ -1,9 +1,7 @@
 /**
- * jquery.meiomask.js
- * $URL: http://svn.assembla.com/svn/meiomask/jquery.meiomask.js $
- * @author: $Author: fabiomcosta $
- * @version 1.1
- * @lastchange: $Date: 2009-03-19 12:28:17 -0300 (Thu, 19 Mar 2009) $
+ * jquery.meio.mask.js
+ * @author: fabiomcosta
+ * @version: 1.1.1
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *

@@ -23,7 +23,7 @@
 		
 		<script type="text/javascript" charset="utf-8">
 			Builder.build('../', {
-				'source': ['jquery.meio.mask.js']
+				'source': ['jquery.meio.mask']
 			});
 			dp.SyntaxHighlighter.ClipboardSwf = 'clipboard.swf';
 			dp.SyntaxHighlighter.HighlightAll('code');
@@ -94,11 +94,7 @@
 				<script type="text/javascript">
 					(function($) {
 						$(function(){
-							//var decimal = $('#decimal_data-mask').get(0);
-							//console.log( $.inArray(decimal, decimal.form.elements) );
-							$('#decimal_data-mask').setMask('decimal').change(function(){
-								//console.log('depois_change');
-							});
+							$('#decimal_data-mask').setMask({'attr': 'data-mask'});
 						});
 					})(jQuery);
 				</script>

@@ -94,6 +94,7 @@
 				signal: false, // this should not be set, to use signal at masks put the signal you want ('-' or '+') at the default value of this mask.
 							   // See the defined masks for a better understanding.
 				
+				textAlign: true, // use false to not use text-align on any mask (at least not by the plugin, you may apply it using css)
 				selectCharsOnFocus: true,
 				autoTab: true,
 				fixedChars : '[(),.:/ -]', // fixed chars to be used on the masks. You may change it for your needs!
@@ -198,7 +199,7 @@
 						});
 						
 						//sets text-align right for reverse masks
-						if(reverse) $this.css('text-align','right');
+						if(reverse && o.textAlign) $this.css('text-align', 'right');
 						
 						// apply mask to the current value of the input
 						if($this.val()!='') $this.val( maskObj.string($this.val(), o) );

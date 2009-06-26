@@ -45,7 +45,7 @@
 				'Z': /[A-Z]/,
 				'a': /[a-zA-Z]/,
 				'*': /[0-9a-zA-Z]/,
-				'@': /[0-9a-zA-ZçÇáàãéèíìóòõúùü]/
+				'@': /[0-9a-zA-ZçÇáàãéèíìóòõúùüê]/
 			},
 			
 			// these keys will be ignored by the mask.
@@ -263,8 +263,8 @@
 					case 'object':
 						o = options;
 				}
+				
 				if(!o.fixedChars) o.fixedChars = this.options.fixedChars;
-
 				var fixedCharsReg = new RegExp(o.fixedChars),
 					fixedCharsRegG = new RegExp(o.fixedChars, 'g');
 					
@@ -670,4 +670,5 @@
 		}
 	});
 })(jQuery);
-
+
+

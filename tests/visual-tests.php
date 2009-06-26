@@ -31,11 +31,15 @@
 		
 		<script type="text/javascript" >
 			(function($){
-				$(
-					function(){
-						$('input:text').setMask();
-					}
-				);
+				/*$.mask.rules = $.extend($.mask.rules, {
+					"~": /[+-]/,
+				    "&": /[de]/,
+				    "9": /[0-9]/
+				});*/
+				//$.mask.masks.ar = {mask: "aaa ~9,9& = ~9,9aaa 999º", fixedChars: '[,.= º]'};
+				$(function(){
+					$('input:text').setMask('ar');
+				});
 			})(jQuery);
 		</script>
 	</head>
@@ -58,9 +62,9 @@
 		</ul>
 
 		<script type="text/javascript">
-			(function($) {
-				$.mask.masks.msk = {mask: '999'};
-			})(jQuery);
+			//(function($) {
+			//	$.mask.masks.msk = {mask: '999'};
+			//})(jQuery);
 		</script>
 	
 		<form action="index_submit" method="get">
@@ -92,11 +96,11 @@
 				<input type="text" id="decimal_data-mask" name="some_name" value="12345" data-mask="decimal" />
 			
 				<script type="text/javascript">
-					(function($) {
+					/*(function($) {
 						$(function(){
 							$('#decimal_data-mask').setMask({'attr': 'data-mask'});
 						});
-					})(jQuery);
+					})(jQuery);*/
 				</script>
 			
 			</fieldset>
@@ -160,7 +164,7 @@
 					<li><a id="lmask_string4" href="#">Mask input value to 'signed-decimal'</a></li>
 				</ul>
 				<script type="text/javascript">
-					(function($) {
+					/*(function($) {
 						$('#lmask_string1').click(function(){
 							$('#masked_string').text( 'Masked value: "'+$.mask.string( $('#dumb_input').val(), '99/99/99' )+'"' );
 							return false;
@@ -177,7 +181,7 @@
 							$('#masked_string').text( 'Masked value: "'+$.mask.string( $('#dumb_input').val(), 'signed-decimal' )+'"' );
 							return false;
 						});
-					})(jQuery);
+					})(jQuery);*/
 				</script>
 			</fieldset>
 		</form>
@@ -221,7 +225,7 @@
 	</div>
 	
 	<script type="text/javascript">
-		$('#cb_test_input').setMask({mask:'99.99-99/99', defaultValue: '000',
+		/*$('#cb_test_input').setMask({mask:'99.99-99/99', defaultValue: '000',
 			onInvalid:function(c,nKey){
 				$('#cb_alerts').text('You can\'t input "'+c+'" in here. It\'s keynumber is "'+nKey+'".');
 				$(this).css('background','red');
@@ -234,7 +238,7 @@
 				$('#cb_alerts').text("You can't enter more characters but your input might be ok!");
 				$(this).css('background','green');
 			}
-		});
+		});*/
 	</script>
 
 	</body>

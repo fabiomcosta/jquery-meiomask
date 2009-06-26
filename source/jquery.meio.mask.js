@@ -45,7 +45,7 @@
 				'Z': /[A-Z]/,
 				'a': /[a-zA-Z]/,
 				'*': /[0-9a-zA-Z]/,
-				'@': /[0-9a-zA-ZçÇáàãéèíìóòõúùü]/
+				'@': /[0-9a-zA-ZçÇáàãâéèêíìóòôõúùü]/
 			},
 			
 			// these keys will be ignored by the mask.
@@ -214,12 +214,12 @@
 						$this.removeAttr(mlStr);
 						
 						// setting the input events
-						$this.bind('keydown', {func:maskObj._keyDown, thisObj:maskObj}, maskObj._onMask)
-							.bind('keypress', {func:maskObj._keyPress, thisObj:maskObj}, maskObj._onMask)
-							.bind('keyup', {func:maskObj._keyUp, thisObj:maskObj}, maskObj._onMask)
-							.bind('focus', maskObj._onFocus)
-							.bind('blur', maskObj._onBlur)
-							.bind('change', maskObj._onChange)
+						$this.bind('keydown.mask', {func:maskObj._keyDown, thisObj:maskObj}, maskObj._onMask)
+							.bind('keypress.mask', {func:maskObj._keyPress, thisObj:maskObj}, maskObj._onMask)
+							.bind('keyup.mask', {func:maskObj._keyUp, thisObj:maskObj}, maskObj._onMask)
+							.bind('focus.mask', maskObj._onFocus)
+							.bind('blur.mask', maskObj._onBlur)
+							.bind('change.mask', maskObj._onChange)
 							.bind(pasteEvent, {func:maskObj._paste, thisObj:maskObj}, maskObj._delayedOnMask);
 					}
 				});
@@ -237,13 +237,7 @@
 							
 						if(maxLength != -1) $this.attr('maxLength', maxLength);
 						
-						$this.unbind('keydown', _this._onMask)
-							.unbind('keypress', _this._onMask)
-							.unbind('keyup', _this._onMask)
-							.unbind('focus', _this._onFocus)
-							.unbind('blur', _this._onBlur)
-							.unbind('change', _this._onChange)
-							.unbind(pasteEvent, _this._delayedOnMask)
+						$this.unbind('.mask')
 							.removeData('mask');
 					}
 				});
@@ -509,7 +503,7 @@
 			
 			// browsers like firefox2 and before and opera doenst have the onPaste event, but the paste feature can be done with the onInput event.
 			__getPasteEvent : function(){
-				return ($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))?'input':'paste';
+				return (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))?'input':'paste') + '.mask';
 			},
 			
 			__getKeyNumber : function(e){

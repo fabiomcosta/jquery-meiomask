@@ -31,14 +31,8 @@
 		
 		<script type="text/javascript" >
 			(function($){
-				/*$.mask.rules = $.extend($.mask.rules, {
-					"~": /[+-]/,
-				    "&": /[de]/,
-				    "9": /[0-9]/
-				});*/
-				//$.mask.masks.ar = {mask: "aaa ~9,9& = ~9,9aaa 999º", fixedChars: '[,.= º]'};
 				$(function(){
-					$('input:text').setMask('ar');
+					$('input:text').setMask();
 				});
 			})(jQuery);
 		</script>
@@ -63,7 +57,7 @@
 
 		<script type="text/javascript">
 			//(function($) {
-			//	$.mask.masks.msk = {mask: '999'};
+				$.mask.masks.msk = {mask: '999'};
 			//})(jQuery);
 		</script>
 	
@@ -219,7 +213,6 @@
 				<label for="signed_mask3">Mask '999.999,99', reverse, with defaultValue='-000' (this example uses the metadata plugin):</label>
 				<input type="text" class="{mask:'99,999.999',type:'reverse',defaultValue:'-000'}" />
 				<input class="{mask:'9',type:'repeat'}" type="text" maxlength="10" />
-				<input class="{mask:'9',type:'repeat'}" type="text" />
 			</fieldset>
 		</form>
 	</div>

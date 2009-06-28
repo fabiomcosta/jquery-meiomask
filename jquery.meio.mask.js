@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.1
+ * @version: 1.1.2
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -33,8 +33,35 @@
 
 (function($){
 		
-	var isIphone = (window.orientation!=undefined);
+	var isIphone = (window.orientation != undefined),
+		// browsers like firefox2 and before and opera doenst have the onPaste event, but the paste feature can be done with the onInput event.
+		pasteEvent = (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))? 'input': 'paste');
+		
+	$.event.special.paste = {
+		setup: function() {
+	    	if(this.addEventListener)
+	        	this.addEventListener(pasteEvent, pasteHandler, false);
+   			else if (this.attachEvent)
+				this.attachEvent(pasteEvent, pasteHandler);
+		},
+
+		teardown: function() {
+			if(this.removeEventListener)
+	        	this.removeEventListener(pasteEvent, pasteHandler, false);
+   			else if (this.detachEvent)
+				this.detachEvent(pasteEvent, pasteHandler);
+		}
+	};
 	
+	// the timeout is set because we can't get the value from the input without it
+	function pasteHandler(e){
+		var self = this;
+		e = $.event.fix(e || window.e);
+		e.type = 'paste';
+		// Execute the right handlers by setting the event type to paste
+		setTimeout(function(){ $.event.handle.call(self, e); }, 1);
+	};
+
 	$.extend({
 		mask : {
 			
@@ -45,7 +72,7 @@
 				'Z': /[A-Z]/,
 				'a': /[a-zA-Z]/,
 				'*': /[0-9a-zA-Z]/,
-				'@': /[0-9a-zA-ZçÇáàãéèíìóòõúùüê]/
+				'@': /[0-9a-zA-ZçÇáàãâéèêíìóòôõúùü]/
 			},
 			
 			// these keys will be ignored by the mask.
@@ -93,8 +120,9 @@
 							   // See the defined masks for a better understanding.
 				
 				textAlign: true, // use false to not use text-align on any mask (at least not by the plugin, you may apply it using css)
-				selectCharsOnFocus: true,
-				autoTab: true,
+				selectCharsOnFocus: true, // select all chars from input on its focus
+				autoTab: true, // auto focus the next form element when you type the mask completely
+				setSize: false, // sets the input size based on the length of the mask (work with fixed and reverse masks only)
 				fixedChars : '[(),.:/ -]', // fixed chars to be used on the masks. You may change it for your needs!
 				
 				onInvalid : function(){},
@@ -162,9 +190,7 @@
 					var $this = $(this),
 						o = $.extend({}, maskObj.options),
 						attrValue = $this.attr(o.attr),
-						tmpMask = '',
-						// 'input' event fires on every keyboard event on the input
-						pasteEvent = maskObj.__getPasteEvent();
+						tmpMask = '';
 						
 					// then we look for the 'attr' option
 					tmpMask = (typeof options == 'string')? options: (attrValue != '')? attrValue: null;
@@ -196,16 +222,21 @@
 							maskNonFixedCharsArray: o.mask.replace(fixedCharsRegG, '').split('')
 						});
 						
+						//setSize option (this is not removed from the input (while removing the mask) since this would be kind of funky)
+						if((o.type=='fixed' || reverse) && o.setSize && !$this.attr('size')) $this.attr('size', o.mask.length);
+						
 						//sets text-align right for reverse masks
 						if(reverse && o.textAlign) $this.css('text-align', 'right');
 						
-						// apply mask to the current value of the input
-						if($this.val()!='') $this.val( maskObj.string($this.val(), o) );
-							
-						// apply the default value of the mask to the input
-						else if(defaultValue!='') $this.val( maskObj.string(defaultValue, o) );
+						if(this.value!='' || defaultValue!=''){
+							// apply mask to the current value of the input or to the default value
+							var val = maskObj.string((this.value!='')? this.value: defaultValue, o);
+							//setting defaultValue fixes the reset button from the form
+							this.defaultValue = val;
+							$this.val(val);
+						}
 						
-						// compactibility patch for infinite mask, that is now repeat
+						// compatibility patch for infinite mask, that is now repeat
 						if(o.type=='infinite') o.type = 'repeat';
 						
 						$this.data('mask', o);
@@ -214,36 +245,27 @@
 						$this.removeAttr(mlStr);
 						
 						// setting the input events
-						$this.bind('keydown', {func:maskObj._keyDown, thisObj:maskObj}, maskObj._onMask)
-							.bind('keypress', {func:maskObj._keyPress, thisObj:maskObj}, maskObj._onMask)
-							.bind('keyup', {func:maskObj._keyUp, thisObj:maskObj}, maskObj._onMask)
-							.bind('focus', maskObj._onFocus)
-							.bind('blur', maskObj._onBlur)
-							.bind('change', maskObj._onChange)
-							.bind(pasteEvent, {func:maskObj._paste, thisObj:maskObj}, maskObj._delayedOnMask);
+						$this.bind('keydown.mask', {func:maskObj._onKeyDown, thisObj:maskObj}, maskObj._onMask)
+							.bind('keypress.mask', {func:maskObj._onKeyPress, thisObj:maskObj}, maskObj._onMask)
+							.bind('keyup.mask', {func:maskObj._onKeyUp, thisObj:maskObj}, maskObj._onMask)
+							.bind('paste.mask', {func:maskObj._onPaste, thisObj:maskObj}, maskObj._onMask)
+							.bind('focus.mask', maskObj._onFocus)
+							.bind('blur.mask', maskObj._onBlur)
+							.bind('change.mask', maskObj._onChange);
 					}
 				});
 			},
 			
 			//unsets the mask from el
 			unset : function(el){
-				var $el = $(el),
-					_this = this;
+				var $el = $(el);
+				
 				return $el.each(function(){
 					var $this = $(this);
-					if( $this.data('mask') ){
-						var maxLength = $this.data('mask').maxLength,
-							pasteEvent = _this.__getPasteEvent();
-							
+					if($this.data('mask')){
+						var maxLength = $this.data('mask').maxLength;
 						if(maxLength != -1) $this.attr('maxLength', maxLength);
-						
-						$this.unbind('keydown', _this._onMask)
-							.unbind('keypress', _this._onMask)
-							.unbind('keyup', _this._onMask)
-							.unbind('focus', _this._onFocus)
-							.unbind('blur', _this._onBlur)
-							.unbind('change', _this._onChange)
-							.unbind(pasteEvent, _this._delayedOnMask)
+						$this.unbind('.mask')
 							.removeData('mask');
 					}
 				});
@@ -263,8 +285,8 @@
 					case 'object':
 						o = options;
 				}
-				
 				if(!o.fixedChars) o.fixedChars = this.options.fixedChars;
+
 				var fixedCharsReg = new RegExp(o.fixedChars),
 					fixedCharsRegG = new RegExp(o.fixedChars, 'g');
 					
@@ -322,13 +344,7 @@
 				return e.data.func.call(thisObj, e, o);
 			},
 			
-			// the timeout is set because on ie we can't get the value from the input without it
-			_delayedOnMask : function(e){
-				e.type='paste';
-				setTimeout(function(){ e.data.thisObj._onMask(e); }, 1);
-			},
-			
-			_keyDown : function(e,o){
+			_onKeyDown : function(e,o){
 				// lets say keypress at desktop == keydown at iphone (theres no keypress at iphone)
 				this.ignore = $.inArray(o.nKey, this.ignoreKeys) > -1 || e.ctrlKey || e.metaKey || e.altKey;
 				if(this.ignore){
@@ -338,7 +354,7 @@
 				return isIphone ? this._keyPress(e, o) : true;
 			},
 			
-			_keyUp : function(e, o){
+			_onKeyUp : function(e, o){
 				//9=TAB_KEY 16=SHIFT_KEY
 				//this is a little bug, when you go to an input with tab key
 				//it would remove the range selected by default, and that's not a desired behavior
@@ -349,10 +365,10 @@
 					return true;
 				}
 
-				return this._paste(e, o);
+				return this._onPaste(e, o);
 			},
 			
-			_paste : function(e,o){
+			_onPaste : function(e,o){
 				// changes the signal at the data obj from the input
 				if(o.reverse) this.__changeSignal(e.type, o);
 				
@@ -382,7 +398,7 @@
 				return true;
 			},
 			
-			_keyPress: function(e, o){
+			_onKeyPress: function(e, o){
 				
 				if(this.ignore) return true;
 				
@@ -507,11 +523,6 @@
 				}
 			},
 			
-			// browsers like firefox2 and before and opera doenst have the onPaste event, but the paste feature can be done with the onInput event.
-			__getPasteEvent : function(){
-				return ($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))?'input':'paste';
-			},
-			
 			__getKeyNumber : function(e){
 				return (e.charCode||e.keyCode||e.which);
 			},
@@ -582,8 +593,7 @@
 			// searches for fixed chars begining from the range start position, till it finds a non fixed
 			__extraPositionsTill : function(rangeStart, maskArray, fixedCharsReg){
 				var extraPos = 0;
-				while( fixedCharsReg.test(maskArray[rangeStart]) ){
-					rangeStart++;
+				while(fixedCharsReg.test(maskArray[rangeStart++])){
 					extraPos++;
 				}
 				return extraPos;
@@ -592,13 +602,13 @@
 			__getNextInput: function(input, selector){
 				var formEls = input.form.elements,
 					initialInputIndex = $.inArray(input, formEls) + 1,
-					jInput = null,
+					$input = null,
 					i;
 				// look for next input on the form of the pased input
 				for(i = initialInputIndex; i < formEls.length; i++){
-					jInput = $(formEls[i]);
-					if(this.__isNextInput(jInput, selector))
-						return jInput;
+					$input = $(formEls[i]);
+					if(this.__isNextInput($input, selector))
+						return $input;
 				}
 					
 				var forms = document.forms,
@@ -608,19 +618,20 @@
 				for(y = initialFormIndex; y < forms.length; y++){
 					tmpFormEls = forms[y].elements;
 					for(i = 0; i < tmpFormEls.length; i++){
-						jInput = $(tmpFormEls[i]);
-						if(this.__isNextInput(jInput, selector))
-							return jInput;
+						$input = $(tmpFormEls[i]);
+						if(this.__isNextInput($input, selector))
+							return $input;
 					}
 				}
 				return null;
 			},
 			
-			__isNextInput: function(formEl, selector){
+			__isNextInput: function($formEl, selector){
+				var formEl = $formEl.get(0);
 				return formEl
-					&& formEl.attr('type') != 'hidden'
-					&& formEl.get(0).tagName.toLowerCase() != 'fieldset'
-					&& (selector === true || (typeof selector == 'string' && formEl.is(selector)));
+					&& (formEl.offsetWidth > 0 || formEl.offsetHeight > 0)
+					&& formEl.nodeName != 'FIELDSET'
+					&& (selector === true || (typeof selector == 'string' && $formEl.is(selector)));
 			},
 			
 			// http://www.bazon.net/mishoo/articles.epl?art_id=1292
@@ -670,5 +681,4 @@
 		}
 	});
 })(jQuery);
-
-
+

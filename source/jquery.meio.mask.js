@@ -258,8 +258,8 @@
 			
 			//unsets the mask from el
 			unset : function(el){
-				var $el = $(el),
-					_this = this;
+				var $el = $(el);
+				
 				return $el.each(function(){
 					var $this = $(this);
 					if($this.data('mask')){

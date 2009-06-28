@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.1
+ * @version: 1.1.2
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -252,7 +252,6 @@
 							.bind('focus.mask', maskObj._onFocus)
 							.bind('blur.mask', maskObj._onBlur)
 							.bind('change.mask', maskObj._onChange);
-
 					}
 				});
 			},
@@ -594,8 +593,7 @@
 			// searches for fixed chars begining from the range start position, till it finds a non fixed
 			__extraPositionsTill : function(rangeStart, maskArray, fixedCharsReg){
 				var extraPos = 0;
-				while( fixedCharsReg.test(maskArray[rangeStart]) ){
-					rangeStart++;
+				while(fixedCharsReg.test(maskArray[rangeStart++])){
 					extraPos++;
 				}
 				return extraPos;

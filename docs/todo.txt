@@ -1,9 +1,8 @@
 TODO FEATURES:
 
 1.1.1 Bugs:
-* A bug that has never been fixed (because i forgot) came to me right now... The last character from a mask can't be a fixed one or it will not be displayed.... Sux to be me... i'll have to fix it.
 * defaultValue is not set and should be, on initialization, so the reset button works properly; OK!
-* Next form element should be visible. (offsetWidth ad height > 0);
+* Next form element should be visible. (offsetWidth and height > 0);
 * âêô are not in the @ rule; OK!
 * set the size of the input, as an option. OK!
 

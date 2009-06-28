@@ -88,7 +88,8 @@
 				
 				<label for="decimal">Decimal number: (with diferent attr)</label>
 				<input type="text" id="decimal_data-mask" name="some_name" value="12345" data-mask="decimal" />
-			
+				
+				<input type="reset" name="some_name" value="RESET TEST" id="some_name" />
 				<script type="text/javascript">
 					/*(function($) {
 						$(function(){

@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.2
+ * @version: 1.1.3
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -96,7 +96,7 @@
 				45	: 'insert',
 				46	: 'delete',
 				116	: 'f5',
-				123	: 'f12',
+				123 : 'f12',
 				224	: 'command'
 			},
 			
@@ -488,7 +488,7 @@
 				//this bug was pointed by Pedro Martins
 				//it fixes a strange behavior that ie was having after a char was inputted in a text input that
 				//had its content selected by any range 
-				if($.browser.msie && ((o.rangeStart==0 && o.range.end==0) || o.rangeStart != o.range.end ))
+				if($.browser.msie && ((o.range.start==0 && o.range.end==0) || o.range.start != o.range.end ))
 					this.__setRange(o._this, o.value.length);
 				return false;
 			},
@@ -682,5 +682,4 @@
 		}
 	});
 })(jQuery);
-
-
+

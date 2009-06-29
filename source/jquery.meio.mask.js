@@ -488,7 +488,7 @@
 				//this bug was pointed by Pedro Martins
 				//it fixes a strange behavior that ie was having after a char was inputted in a text input that
 				//had its content selected by any range 
-				if($.browser.msie && ((o.rangeStart==0 && o.range.end==0) || o.rangeStart != o.range.end ))
+				if($.browser.msie && ((o.range.start==0 && o.range.end==0) || o.range.start != o.range.end ))
 					this.__setRange(o._this, o.value.length);
 				return false;
 			},

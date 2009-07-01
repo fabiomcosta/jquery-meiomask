@@ -321,7 +321,7 @@
 			
 			_onBlur: function(e){
 				var $this = $(this), dataObj = $this.data('mask');
-				if(dataObj.inputFocusValue != $this.val() && dataObj.type=='reverse' && !dataObj.changed)
+				if(dataObj.inputFocusValue != $this.val() && !dataObj.changed)
 					$this.trigger('change');
 			},
 			
@@ -391,7 +391,8 @@
 					this.__setRange(o._this, o.range.start, o.range.end);
 					
 				//fix so ie's and safari's caret won't go to the end of the input value.
-				if( ($.browser.msie || $.browser.safari) && !o.reverse) this.__setRange(o._this,o.range.start,o.range.end);
+				if( ($.browser.msie || $.browser.safari) && !o.reverse)
+					this.__setRange(o._this,o.range.start,o.range.end);
 				
 				if(this.ignore) return true;
 				
@@ -447,9 +448,6 @@
 				
 				else o.data.onValid.call(o._this, c, o.nKey);
 				
-				// fix accessibility bug
-				//if(c == maskArray[rangeStart]) return this.ignorePaste = true;
-
 				var $thisVal = this.__maskArray(
 					valueArray,
 					o.data.maskNonFixedCharsArray,

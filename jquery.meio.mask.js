@@ -207,6 +207,9 @@
 					if($.metadata) o = $.extend(o, $this.metadata());
 					
 					if(o.mask != null){
+
+						// prevents javascript automatic type convertion
+						o.mask += '';
 						
 						if($this.data('mask')) maskObj.unset($this);
 						

@@ -464,8 +464,6 @@
           extraPos
         );
         
-        // o.$this.val( $thisVal );
-        
         return (o.reverse)? this._keyPressReverse(e, o): (o.fixed)? this._keyPressFixed(e, o): true;
       },
       

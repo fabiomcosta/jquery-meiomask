@@ -82,29 +82,29 @@
             keyRepresentation : {
                 8    : 'backspace',
                 9    : 'tab',
-                13    : 'enter',
-                16    : 'shift',
-                17    : 'control',
-                18    : 'alt',
-                27    : 'esc',
-                33    : 'page up',
-                34    : 'page down',
-                35    : 'end',
-                36    : 'home',
-                37    : 'left',
-                38    : 'up',
-                39    : 'right',
-                40    : 'down',
-                45    : 'insert',
-                46    : 'delete',
-                116    : 'f5',
-                123 : 'f12',
-                224    : 'command'
+                13   : 'enter',
+                16   : 'shift',
+                17   : 'control',
+                18   : 'alt',
+                27   : 'esc',
+                33   : 'page up',
+                34   : 'page down',
+                35   : 'end',
+                36   : 'home',
+                37   : 'left',
+                38   : 'up',
+                39   : 'right',
+                40   : 'down',
+                45   : 'insert',
+                46   : 'delete',
+                116  : 'f5',
+                123  : 'f12',
+                224  : 'command'
             },
 
             iphoneKeyRepresentation : {
                 10    : 'go',
-                127    : 'delete'
+                127   : 'delete'
             },
 
             signals : {
@@ -138,17 +138,17 @@
             // and then if the 'attr' options value is 'alt', your input should look like:
             // <input type="text" name="some_name" id="some_name" alt="msk" />
             masks : {
-                'phone'                : { mask : '(99) 9999-9999' },
-                'phone-us'            : { mask : '(999) 999-9999' },
-                'cpf'                : { mask : '999.999.999-99' }, // cadastro nacional de pessoa fisica
-                'cnpj'                : { mask : '99.999.999/9999-99' },
-                'date'                : { mask : '39/19/9999' }, //uk date
-                'date-us'            : { mask : '19/39/9999' },
-                'cep'                : { mask : '99999-999' },
-                'time'                : { mask : '29:59' },
-                'cc'                : { mask : '9999 9999 9999 9999' }, //credit card mask
-                'integer'            : { mask : '999.999.999.999', type : 'reverse' },
-                'decimal'            : { mask : '99,999.999.999.999', type : 'reverse', defaultValue : '000' },
+                'phone'             : { mask : '(99) 9999-9999' },
+                'phone-us'          : { mask : '(999) 999-9999' },
+                'cpf'               : { mask : '999.999.999-99' }, // cadastro nacional de pessoa fisica (kind of a brazillian ssn)
+                'cnpj'              : { mask : '99.999.999/9999-99' },
+                'date'              : { mask : '39/19/9999' },     // uk date
+                'date-us'           : { mask : '19/39/9999' },
+                'cep'               : { mask : '99999-999' },
+                'time'              : { mask : '29:59' },
+                'cc'                : { mask : '9999 9999 9999 9999' }, // credit card
+                'integer'           : { mask : '999.999.999.999',    type : 'reverse' },
+                'decimal'           : { mask : '99,999.999.999.999', type : 'reverse', defaultValue : '000' },
                 'decimal-us'        : { mask : '99.999,999,999,999', type : 'reverse', defaultValue : '000' },
                 'signed-decimal'    : { mask : '99,999.999.999.999', type : 'reverse', defaultValue : '+000' },
                 'signed-decimal-us' : { mask : '99,999.999.999.999', type : 'reverse', defaultValue : '+000' }
@@ -221,17 +221,17 @@
 
                         if(o.maxLength == -1) o.maxLength = $this.attr(mlStr);
 
-                        o = $.extend({}, o,{
+                        o = $.extend({}, o, {
                             fixedCharsReg: new RegExp(o.fixedChars),
                             fixedCharsRegG: fixedCharsRegG,
                             maskArray: o.mask.split(''),
                             maskNonFixedCharsArray: o.mask.replace(fixedCharsRegG, '').split('')
                         });
 
-                        //setSize option (this is not removed from the input (while removing the mask) since this would be kind of funky)
+                        // setSize option (this is kept when the mask is removed)
                         if((o.type=='fixed' || reverse) && o.setSize && !$this.attr('size')) $this.attr('size', o.mask.length);
 
-                        //sets text-align right for reverse masks
+                        // sets text-align right for reverse masks
                         if(reverse && o.textAlign) $this.css('text-align', 'right');
 
                         if(this.value!=='' || defaultValue!==''){

@@ -94,8 +94,11 @@
                 <label for="decimal">Decimal number: (with diferent attr)</label>
                 <input type="text" id="decimal_data-mask" name="some_name" value="12345" data-mask="decimal" />
 
+                <label for="date">Date:</label>
+                <input type="text" id="date-mask" name="date" value="" data-mask="date" />
+
                 <input type="reset" name="some_name" value="RESET TEST" id="some_name" />
-                <script type="text/javascript">
+                <script>
                     /*(function($) {
                         $(function(){
                             $('#decimal_data-mask').setMask({'attr': 'data-mask'});
@@ -218,6 +221,16 @@
                 <input type="text" value="-4445" alt="signed-decimal" />
                 <label for="signed_mask3">Mask '999.999,99', reverse, with defaultValue='-000' (this example uses the metadata plugin):</label>
                 <input type="text" class="{mask:'99,999.999',type:'reverse',defaultValue:'-000'}" />
+                <label for="signed_mask4">type repeat:</label>
+                <input class="{mask:'9',type:'repeat'}" type="text" maxlength="10" />
+            </fieldset>
+        </form>
+
+        <h3 id="mm_repeat">repeat mask type example</h3>
+
+        <form action="index_submit" method="get">
+            <fieldset>
+                <legend>Example with the repeat mask type</legend>
                 <input class="{mask:'9',type:'repeat'}" type="text" maxlength="10" />
             </fieldset>
         </form>

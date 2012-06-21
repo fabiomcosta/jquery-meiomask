@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>MeioMask jQuery Specs</title>
+        <meta charset="utf-8"/>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="../assets/js-spec/Specs.css"/>
+        <script src="../assets/js-spec/JSSpec.js"></script>
+        <script src="../assets/js-spec/DiffMatchPatch.js"></script>
+        <script src="../assets/js-spec/Builder.js"></script>
+
+        <script>
+            (function() {
+                var sources = [
+                    '../source/jquery.meio.mask',
+                    '../tests/meio/jquery.meio.mask'
+                ];
+
+                var jQueryVersion = location.search.match(/[&?]version=([\d.]+)(?:&|$)/);
+
+                if (!jQueryVersion) {
+                    jQueryVersion = '1.2.6';
+                    sources.unshift('../assets/jquery/jquery.metadata');
+                } else {
+                    jQueryVersion = jQueryVersion[1];
+                }
+
+                sources.unshift('../assets/jquery/jquery-'+ jQueryVersion);
+
+                Builder.build(sources);
+            }());
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

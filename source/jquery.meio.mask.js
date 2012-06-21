@@ -33,35 +33,36 @@
 
 (function($){
 
-    var isIphone = (window.orientation != null),
-        // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
-        pasteEvent = (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))? 'input': 'paste');
+    var isIphone = (window.orientation != null);
+
+    // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
+    var pasteEvent = (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))? 'input': 'paste');
+
+    // the timeout is set because we can't get the value from the input without it
+    var pasteHandler = function(e) {
+        e = $.event.fix(e || window.event);
+        e.type = 'paste';
+        var el = e.target;
+
+        setTimeout(function() {
+            $.event.dispatch.call(el, e);
+        }, 1);
+    };
 
     $.event.special.paste = {
         setup: function() {
             if(this.addEventListener)
                 this.addEventListener(pasteEvent, pasteHandler, false);
             else if (this.attachEvent)
-                this.attachEvent(pasteEvent, pasteHandler);
+                this.attachEvent('on'+ pasteEvent, pasteHandler);
         },
 
         teardown: function() {
             if(this.removeEventListener)
                 this.removeEventListener(pasteEvent, pasteHandler, false);
             else if (this.detachEvent)
-                this.detachEvent(pasteEvent, pasteHandler);
+                this.detachEvent('on'+ pasteEvent, pasteHandler);
         }
-    };
-
-    // the timeout is set because we can't get the value from the input without it
-    var pasteHandler  = function(e){
-        var self = this;
-        e = $.event.fix(e || window.e);
-        e.type = 'paste';
-        // Execute the right handlers by setting the event type to paste
-        setTimeout(function() {
-            $.event.handle.call(self, e);
-        }, 1);
     };
 
     $.extend({

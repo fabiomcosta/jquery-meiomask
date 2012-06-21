@@ -36,6 +36,7 @@
             (function($){
                 $(function(){
                     $('input[type="text"]').setMask();
+                    //$('#decimal_data-mask, #date-mask').setMask({'attr': 'data-mask'});
                 });
             })(jQuery);
         </script>
@@ -45,7 +46,7 @@
 
         <form method="get">
             <p><input type="text" name="version" value="1.7.2" /></p>
-            <p><input type="submit" value="Continue &rarr;"></p>
+            <p><input type="submit" value="Continue &rarr;"/></p>
         </form>
 
         <h2>Menu</h2>
@@ -60,10 +61,8 @@
             <li><a title="Signed Reverse Masks" href="#mm_signed">Signed Reverse Masks</a></li>
         </ul>
 
-        <script type="text/javascript">
-            //(function($) {
-                $.mask.masks.msk = {mask: '999'};
-            //})(jQuery);
+        <script>
+            $.mask.masks.msk = {mask: '999'};
         </script>
 
         <form action="index_submit" method="get">
@@ -82,7 +81,7 @@
         <form action="index_submit" method="get">
             <fieldset>
                 <legend>Example form with defined masks</legend>
-                <label for="cpf">Credit Card:</label>
+                <label for="cc">Credit Card:</label>
                 <input type="text" id="cc" name="cc" alt="cc" />
 
                 <label for="time_example">Time:</label>
@@ -98,14 +97,6 @@
                 <input type="text" id="date-mask" name="date" value="" data-mask="date" />
 
                 <input type="reset" name="some_name" value="RESET TEST" id="some_name" />
-                <script>
-                    /*(function($) {
-                        $(function(){
-                            $('#decimal_data-mask').setMask({'attr': 'data-mask'});
-                        });
-                    })(jQuery);*/
-                </script>
-
             </fieldset>
         </form>
 
@@ -148,7 +139,7 @@
                 <ul>
                     <li><a onclick="jQuery('#change_mask').setMask('***:***').val('');return false;" href="#">Change mask to '***:***'</a></li>
                     <li><a onclick="jQuery('#change_mask').setMask('(aaa) **-9999').val('');return false;" href="#">Change mask to '(aaa) **-9999'</a></li>
-                     <li><a onclick="jQuery('#change_mask').unsetMask().val('');return false;" href="#">unset the mask</a></li>
+                    <li><a onclick="jQuery('#change_mask').unsetMask().val('');return false;" href="#">unset the mask</a></li>
                 </ul>
             </fieldset>
         </form>

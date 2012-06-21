@@ -16,19 +16,14 @@
         <script>
             (function() {
                 var sources = [
+                    '../assets/jquery/jquery.metadata',
                     '../source/jquery.meio.mask'
                 ];
 
                 var jQueryVersion = location.search.match(/[&?]version=([\d.]+)(?:&|$)/);
+                jQueryVersion = (jQueryVersion) ? jQueryVersion[1] : '1.7.2';
 
-                if (!jQueryVersion) {
-                    jQueryVersion = '1.2.6';
-                    sources.unshift('../assets/jquery/jquery.metadata');
-                } else {
-                    jQueryVersion = jQueryVersion[1];
-                }
-
-                sources.unshift('../assets/jquery/jquery-'+ jQueryVersion);
+                sources.unshift('http://ajax.googleapis.com/ajax/libs/jquery/'+ jQueryVersion +'/jquery');
 
                 Builder.build(sources);
 
@@ -40,7 +35,7 @@
         <script>
             (function($){
                 $(function(){
-                    $('input:text').setMask();
+                    $('input[type="text"]').setMask();
                 });
             })(jQuery);
         </script>
@@ -48,8 +43,10 @@
     <body>
         <div id="content">
 
-        <p><a title="1.2.6" href="?version=1.2.6">1.2.6</a></p>
-        <p><a title="1.3.2" href="?version=1.3.2">1.3.2</a></p>
+        <form method="get">
+            <p><input type="text" name="version" value="1.7.2" /></p>
+            <p><input type="submit" value="Continue &rarr;"></p>
+        </form>
 
         <h2>Menu</h2>
         <ul>

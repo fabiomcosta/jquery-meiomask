@@ -34,7 +34,7 @@
 (function($){
 
     var isIphone = (window.orientation != null),
-        // browsers like firefox2 and before and opera doenst have the onPaste event, but the paste feature can be done with the onInput event.
+        // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
         pasteEvent = (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9 ))? 'input': 'paste');
 
     $.event.special.paste = {

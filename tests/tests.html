@@ -12,20 +12,15 @@
         <script>
             (function() {
                 var sources = [
+                    '../assets/jquery/jquery.metadata',
                     '../source/jquery.meio.mask',
                     '../tests/meio/jquery.meio.mask'
                 ];
 
                 var jQueryVersion = location.search.match(/[&?]version=([\d.]+)(?:&|$)/);
+                jQueryVersion = (jQueryVersion) ? jQueryVersion[1] : '1.7.2';
 
-                if (!jQueryVersion) {
-                    jQueryVersion = '1.2.6';
-                    sources.unshift('../assets/jquery/jquery.metadata');
-                } else {
-                    jQueryVersion = jQueryVersion[1];
-                }
-
-                sources.unshift('../assets/jquery/jquery-'+ jQueryVersion);
+                sources.unshift('http://ajax.googleapis.com/ajax/libs/jquery/'+ jQueryVersion +'/jquery');
 
                 Builder.build(sources);
             }());

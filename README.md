@@ -31,10 +31,17 @@ How to use
         </body>
     </html>
 
+
+Documentation
+-------------
+
+http://www.meiocodigo.com/projects/meiomask/
+
 Demos
 -----
 
-You can see it in action into the project at tests/visual-tests.html.
+You can see some demos inside the documentation at http://www.meiocodigo.com/projects/meiomask/#mm_demos
+and can play with them on the tests/visual-tests.html file.
 
 Changelog
 ---------
@@ -101,4 +108,5 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
+
 

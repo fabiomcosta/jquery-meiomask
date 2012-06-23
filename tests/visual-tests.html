@@ -35,7 +35,10 @@
         <script>
             (function($){
                 $(function(){
-                    $('input[type="text"]').setMask();
+                    $('input[type="text"]').each(function() {
+                        var input = $(this);
+                        $(this).setMask($(this).attr('alt'));
+                    });
                     //$('#decimal_data-mask, #date-mask').setMask({'attr': 'data-mask'});
                 });
             })(jQuery);

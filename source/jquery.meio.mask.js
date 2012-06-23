@@ -358,7 +358,7 @@
                     var rep = this.keyRep[o.nKey];
                     o.data.onValid.call(o._this, rep? rep: '', o.nKey);
                 }
-                return isIphone ? this._keyPress(e, o) : true;
+                return isIphone ? this._onKeyPress(e, o) : true;
             },
 
             _onKeyUp : function(e, o){

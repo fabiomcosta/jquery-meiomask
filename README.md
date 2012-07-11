@@ -39,6 +39,10 @@ and can play with them on the tests/visual-tests.html file.
 
 ## Changelog
 
+### v1.1.6
+* doesn't throw errors while using autoTab on an input that has no parent form. https://github.com/fabiomcosta/jquery-meiomask/issues/8
+* does not jump the carret to the end of the input while trying to change the current text on an input with the 'repeat' mask. https://github.com/fabiomcosta/jquery-meiomask/pull/14
+
 ### v1.1.5
 * fixes bug while being used on mobile.
 * fixes bug on repeat mask. All chars were being added to the end of the input.

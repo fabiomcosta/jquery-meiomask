@@ -281,7 +281,7 @@
             //masks a string
             string: function(str, options) {
                 this.init();
-                var o={};
+                var o = {};
                 if (typeof str != 'string') str = String(str);
                 switch(typeof options) {
                     case 'string':
@@ -335,14 +335,18 @@
                 $(this).data('mask').changed = true;
             },
 
-            _onMask : function(e) {
+            _onMask: function(e) {
                 var thisObj = e.data.thisObj,
                     o = {};
+
                 o._this = e.target;
                 o.$this = $(o._this);
-                // if the input is readonly it does nothing
-                if (o.$this.attr('readonly')) return true;
                 o.data = o.$this.data('mask');
+
+                if (o.$this.attr('readonly') || !o.data) {
+                    return true;
+                }
+
                 o[o.data.type] = true;
                 o.value = o.$this.val();
                 o.nKey = thisObj.__getKeyNumber(e);
@@ -560,25 +564,28 @@
             },
 
             // applyes the default value to the result string
-            __applyDefaultValue : function(defaultValue) {
+            __applyDefaultValue: function(defaultValue) {
                 var defLen = defaultValue.length,
                     thisLen = this.length,
                     i;
                 //removes the leading chars
                 for (i = thisLen-1; i >= 0; i--) {
-                    if (this[i] == defaultValue.charAt(0)) this.pop();
+                    if (this[i] == defaultValue.charAt(0)) {
+                        this.pop();
+                    }
                     else break;
                 }
                 // apply the default value
-                for (i = 0; i < defLen; i++) if (!this[i])
+                for (i = 0; i < defLen; i++) if (!this[i]) {
                     this[i] = defaultValue.charAt(i);
+                }
 
                 return this;
             },
 
             // Removes values that doesnt match the mask from the valueArray
             // Returns the array without the invalid chars.
-            __removeInvalidChars : function(valueArray, maskNonFixedCharsArray, repeatType) {
+            __removeInvalidChars: function(valueArray, maskNonFixedCharsArray, repeatType) {
                 // removes invalid chars
                 for (var i=0, y=0; i<valueArray.length; i++ ) {
                     if ( maskNonFixedCharsArray[y] &&
@@ -594,7 +601,7 @@
             },
 
             // Apply the current input mask to the valueArray and returns it.
-            __applyMask : function(valueArray, maskArray, plus, fixedCharsReg) {
+            __applyMask: function(valueArray, maskArray, plus, fixedCharsReg) {
                 if ( typeof plus == 'undefined' ) plus = 0;
                 // apply the current mask to the array of chars
                 for (var i=0; i<valueArray.length+plus; i++) {
@@ -605,7 +612,7 @@
             },
 
             // searches for fixed chars begining from the range start position, till it finds a non fixed
-            __extraPositionsTill : function(rangeStart, maskArray, fixedCharsReg) {
+            __extraPositionsTill: function(rangeStart, maskArray, fixedCharsReg) {
                 var extraPos = 0;
                 while (fixedCharsReg.test(maskArray[rangeStart++])) {
                     extraPos++;
@@ -614,27 +621,38 @@
             },
 
             __getNextInput: function(input, selector) {
-                var formEls = input.form.elements,
+                var form = input.form;
+
+                if (form == null) {
+                    return null;
+                }
+
+                var formEls = form.elements,
                     initialInputIndex = $.inArray(input, formEls) + 1,
+                    len = formEls.length,
                     $input = null,
                     i;
+
                 // look for next input on the form of the pased input
-                for (i = initialInputIndex; i < formEls.length; i++) {
+                for (i = initialInputIndex; i < len; i++) {
                     $input = $(formEls[i]);
-                    if (this.__isNextInput($input, selector))
+                    if (this.__isNextInput($input, selector)) {
                         return $input;
+                    }
                 }
 
                 var forms = document.forms,
                     initialFormIndex = $.inArray(input.form, forms) + 1,
-                    y, tmpFormEls = null;
+                    y, tmpFormEls, _len = forms.length;
                 // look for the next forms for the next input
-                for (y = initialFormIndex; y < forms.length; y++) {
+                for (y = initialFormIndex; y < _len; y++) {
                     tmpFormEls = forms[y].elements;
-                    for (i = 0; i < tmpFormEls.length; i++) {
+                    len = tmpFormEls.length;
+                    for (i = 0; i < len; i++) {
                         $input = $(tmpFormEls[i]);
-                        if (this.__isNextInput($input, selector))
+                        if (this.__isNextInput($input, selector)) {
                             return $input;
+                        }
                     }
                 }
                 return null;
@@ -649,12 +667,13 @@
             },
 
             // http://www.bazon.net/mishoo/articles.epl?art_id=1292
-            __setRange : function(input, start, end) {
-                if (typeof end == 'undefined') end = start;
+            __setRange: function(input, start, end) {
+                if (typeof end == 'undefined') {
+                    end = start;
+                }
                 if (input.setSelectionRange) {
                     input.setSelectionRange(start, end);
-                }
-                else{
+                } else {
                     // assumed IE
                     var range = input.createTextRange();
                     range.collapse();
@@ -665,7 +684,7 @@
             },
 
             // adaptation from http://digitarald.de/project/autocompleter/
-            __getRange : function(input) {
+            __getRange: function(input) {
                 if (!$.browser.msie) return {start: input.selectionStart, end: input.selectionEnd};
                 var pos = {start: 0, end: 0},
                     range = document.selection.createRange();
@@ -675,7 +694,7 @@
             },
 
             //deprecated
-            unmaskedVal : function(el) {
+            unmaskedVal: function(el) {
                 return $(el).val().replace($.mask.fixedCharsRegG, '');
             }
 
@@ -683,14 +702,14 @@
     });
 
     $.fn.extend({
-        setMask : function(options) {
+        setMask: function(options) {
             return $.mask.set(this, options);
         },
-        unsetMask : function() {
+        unsetMask: function() {
             return $.mask.unset(this);
         },
         //deprecated
-        unmaskedVal : function() {
+        unmaskedVal: function() {
             return $.mask.unmaskedVal(this[0]);
         }
     });

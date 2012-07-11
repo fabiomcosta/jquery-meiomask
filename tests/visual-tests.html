@@ -68,6 +68,22 @@
             $.mask.masks.msk = {mask: '999'};
         </script>
 
+        <input type="text" id="uuu" alt="msk" />
+
+
+        <input type="text" id="txtTelefone" />
+
+        <script>
+            $('#txtTelefone').bind('keyup', function () {
+                var input = $(this);
+                if (input.val().length >= 2) {
+                    input.setMask('(99) 9999-9999');
+                } else {
+                    input.unsetMask();
+                }
+            });
+        </script>
+
         <form action="index_submit" method="get">
             <fieldset>
                 <legend>Input with the 'msk' Mask</legend>

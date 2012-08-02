@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.5
+ * @version: 1.1.6
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -524,7 +524,11 @@
                     var nextEl = this.__getNextInput(o._this, o.data.autoTab);
                     if (nextEl) {
                         o.$this.trigger('blur');
-                        nextEl.focus().select();
+                        try {
+	                        nextEl.focus();
+	                        nextEl.select(); //sometimes the element just vanish on focus();
+                        } catch(e) { //do nothing
+                        }
                     }
                 }
             },
@@ -714,4 +718,5 @@
         }
     });
 })(jQuery);
+
 

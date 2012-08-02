@@ -68,7 +68,7 @@ class Builder:
             print '** Succesfully created zipped file. **'
         zip_file.close()
 
-    def build(self, file_name, files, extra_zip_files={}, root='Source/'):
+    def build(self, file_name, files, extra_zip_files={}, root='source/'):
         self.file_name = file_name
         self.add_files('javascript_files', files, root=root, extension=self.extension)
         self.add_files('extra_zip_files', extra_zip_files)

@@ -526,7 +526,9 @@
                         o.$this.trigger('blur');
                         try {
 	                        nextEl.focus();
-	                        nextEl.select(); //sometimes the element just vanish on focus();
+	                        if (o.data.selectCharsOnFocus) {
+		                        nextEl.select(); //sometimes the element just vanish on focus();
+		                    }
                         } catch(e) { //do nothing
                         }
                     }

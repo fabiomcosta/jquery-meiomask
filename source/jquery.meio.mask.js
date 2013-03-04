@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.5
+ * @version: 1.1.6
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -36,7 +36,7 @@
     var isIphone = (window.orientation != null);
 
     // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
-    var pasteEvent = (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9)) ? 'input' : 'paste');
+    var pasteEvent = (($.support.input) ? 'input' : 'paste');
 
     // the timeout is set because we can't get the value from the input without it
     var pasteHandler = function(e) {
@@ -401,7 +401,7 @@
                     this.__setRange(o._this, o.range.start, o.range.end);
 
                 //fix so ie's and safari's caret won't go to the end of the input value.
-                if (($.browser.msie || $.browser.safari) && !o.reverse)
+                if (!$.support.input && !o.reverse)
                     this.__setRange(o._this,o.range.start,o.range.end);
 
                 if (this.ignore) return true;
@@ -504,7 +504,7 @@
                 // this bug was pointed by Pedro Martins
                 // it fixes a strange behavior that ie was having after a char was inputted in a text input that
                 // had its content selected by any range
-                if ($.browser.msie && ((o.range.start === 0 && o.range.end === 0) || o.range.start != o.range.end ))
+                if (!$.support.input && ((o.range.start === 0 && o.range.end === 0) || o.range.start != o.range.end ))
                     this.__setRange(o._this, o.value.length);
                 return false;
             },
@@ -524,7 +524,13 @@
                     var nextEl = this.__getNextInput(o._this, o.data.autoTab);
                     if (nextEl) {
                         o.$this.trigger('blur');
-                        nextEl.focus().select();
+                        try {
+	                        nextEl.focus();
+	                        if (o.data.selectCharsOnFocus) {
+		                        nextEl.select(); //sometimes the element just vanish on focus();
+		                    }
+                        } catch(e) { //do nothing
+                        }
                     }
                 }
             },
@@ -685,7 +691,7 @@
 
             // adaptation from http://digitarald.de/project/autocompleter/
             __getRange: function(input) {
-                if (!$.browser.msie) return {start: input.selectionStart, end: input.selectionEnd};
+                if (!$.support.input) return {start: input.selectionStart, end: input.selectionEnd};
                 var pos = {start: 0, end: 0},
                     range = document.selection.createRange();
                 pos.start = 0 - range.duplicate().moveStart('character', -100000);
@@ -714,3 +720,4 @@
         }
     });
 })(jQuery);
+

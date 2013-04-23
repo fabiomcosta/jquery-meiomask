@@ -32,7 +32,15 @@
  */
 
 (function($) {
-
+    
+    if(!$.browser){
+        $.browser = {};
+        $.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
+        $.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
+        $.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
+        $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
+    }
+    
     var isIphone = (window.orientation != null);
 
     // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
@@ -714,4 +722,5 @@
         }
     });
 })(jQuery);
-
+
+

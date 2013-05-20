@@ -1,6 +1,12 @@
-# jQuery MeioMask - Copyright (c) 2008-09-16 [Fábio Miranda Costa](http://meiocodigo.com/)
+# jQuery MeioMask
 
 jQuery MeioMask - a jquery plugin for masking text inputs.
+
+## Maintainer
+
+A maintainer is needed for this project, unfortunately I don't have time to work on it anymore and I would be more
+than happy to point to a well maintained fork of the project.
+Just send me a message so we can figure this out.
 
 ## Dependencies
 
@@ -89,6 +95,8 @@ and can play with them on the tests/visual-tests.html file.
 * initial release.
 
 ## License
+
+Copyright (c) 2008-09 Fabio M. Costa fabiomcosta@gmail.com
 
 The MIT License (http://www.opensource.org/licenses/mit-license.php)
 

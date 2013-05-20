@@ -2,7 +2,7 @@
 
 jQuery MeioMask - a jquery plugin for masking text inputs.
 
-## Maintainer
+## Maintainer needed
 
 A maintainer is needed for this project, unfortunately I don't have time to work on it anymore and I would be more
 than happy to point to a well maintained fork of the project.

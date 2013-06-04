@@ -32,31 +32,31 @@
  */
 
 (function($) {
-    
-    if(!$.browser){
-        // https://github.com/jquery/jquery-migrate/blob/master/src/core.js#L50
-        //
-        uaMatch = function(ua) {
-          ua = ua.toLowerCase();
 
-          var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
-              /(webkit)[ \/]([\w.]+)/.exec(ua) ||
-              /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
-              /(msie) ([\w.]+)/.exec(ua) ||
-              ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
-              [];
+    // https://github.com/jquery/jquery-migrate/blob/master/src/core.js#L50
+    if (!$.browser) {
+        var uaMatch = function(ua) {
+            ua = ua.toLowerCase();
 
-          return match[2] || "0";
+            var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+                /(webkit)[ \/]([\w.]+)/.exec(ua) ||
+                /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+                /(msie) ([\w.]+)/.exec(ua) ||
+                ua.indexOf('compatible') < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) ||
+                [];
+
+            return match[2] || '0';
         };
 
-        $.browser = {};
-        $.browser.mozilla = /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase());
-        $.browser.webkit = /webkit/.test(navigator.userAgent.toLowerCase());
-        $.browser.opera = /opera/.test(navigator.userAgent.toLowerCase());
-        $.browser.msie = /msie/.test(navigator.userAgent.toLowerCase());
-        $.browser.version = uaMatch(navigator.userAgent);
+        $.browser = {
+            mozilla: /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase()),
+            webkit: /webkit/.test(navigator.userAgent.toLowerCase()),
+            opera: /opera/.test(navigator.userAgent.toLowerCase()),
+            msie: /msie/.test(navigator.userAgent.toLowerCase()),
+            version: uaMatch(navigator.userAgent)
+        };
     }
-    
+
     var isIphone = (window.orientation != null);
 
     // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
@@ -738,5 +738,4 @@
         }
     });
 })(jQuery);
-
-
+

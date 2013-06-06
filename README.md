@@ -45,6 +45,9 @@ and can play with them on the tests/visual-tests.html file.
 
 ## Changelog
 
+### v1.1.7
+* fixes errors related to $.browser, that was removed from jQuery.
+
 ### v1.1.6
 * doesn't throw errors while using autoTab on an input that has no parent form. https://github.com/fabiomcosta/jquery-meiomask/issues/8
 * does not jump the carret to the end of the input while trying to change the current text on an input with the 'repeat' mask. https://github.com/fabiomcosta/jquery-meiomask/pull/14

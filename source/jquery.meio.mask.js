@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.7
+ * @version: 1.1.8
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -155,7 +155,9 @@
 
                 onInvalid: function() {},
                 onValid: function() {},
-                onOverflow: function() {}
+                onOverflow: function() {},
+                onFocus: function(input, evt) {},
+                onBlur: function(input, evt) {}
             },
 
             // masks. You may add yours!
@@ -347,12 +349,16 @@
                 dataObj.inputFocusValue = $this.val();
                 dataObj.changed = false;
                 if (dataObj.selectCharsOnFocus) $this.select();
+                // trigger mask function
+                dataObj.onFocus(this, e);
             },
 
             _onBlur: function(e) {
                 var $this = $(this), dataObj = $this.data('mask');
                 if (dataObj.inputFocusValue != $this.val() && !dataObj.changed)
                     $this.trigger('change');
+                // trigger  mask function
+                dataObj.onBlur(this, e);
             },
 
             _onChange: function(e) {

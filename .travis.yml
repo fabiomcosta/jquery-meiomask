@@ -6,7 +6,7 @@ before_script:
   - sh -e /etc/init.d/xvfb start
 rvm:
   - 2.0.0
-script: bundle exec rake
+script: rake jasmine:headless
 notifications:
   email:
     - johnvoloski@gmail.com

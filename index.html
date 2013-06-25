@@ -1,23 +1,53 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <title>meioMask Options</title>
-    </head>
-    <body>
-        <form action="tests/visual-tests.html" method="get">
-            <p><input type="text" name="version" value="1.7.2" /></p>
-            <p><input type="submit" value="Continue &rarr;"></p>
-        </form>
-
-        <form action="tests/tests.html" method="get">
-            <p><input type="text" name="version" value="1.7.2" /></p>
-            <p><input type="submit" value="Continue &rarr;"></p>
-        </form>
-
-        <script>
-            document.getElementsByTagName('input')[0].select();
-        </script>
-    </body>
+  <head>
+    <title>jQuery MeioMask - a jQuery plugin for masking text inputs</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="assets/javascripts/jquery-1.10.1.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="assets/stylesheets/global.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand">jQuery MeioMask</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <ul class="nav nav-tabs nav-stacked affixed-top">
+            <li><a href="#">Standalone<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">With Metadata Plugin<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">Paste Feature<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">Change on-the-fly<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">The $.mask.string() Function<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">Applied to a Readonly Input<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">The Callbacks<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#">Signed Reverse Masks<i class="icon-chevron-right pull-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="span9"></div>
+      </div>
+    </div>
+    <footer>
+      <div class="container-fluid">
+      </div>
+    </footer>
+  </body>
 </html>

@@ -215,7 +215,12 @@
             <fieldset>
                 <legend>Example with a input and defined callbacks</legend>
                 <label for="cb_test_input">Mask '99.99-99/99':</label>
-                <input type="text" id="cb_test_input" />
+                <input type="text" id="cb_test_input" name="cb_test_input" />
+                <label for="cb_test_input_focus">Focus on Mask '99.99-99/99':</label>
+                <input type="text" id="cb_test_input_focus" name="cb_test_input_focus"/>
+                <label for="cb_test_input_blur">Blur on Mask '99.99-99/99':</label>
+                <input type="text" id="cb_test_input_blur" name="cb_test_input_blur"/>
+                </br>
                 <span id="cb_alerts"></span>
             </fieldset>
         </form>
@@ -245,6 +250,16 @@
             </fieldset>
         </form>
     </div>
+    <script type="text/javascript">
+      $('#cb_test_input_focus').setMask({mask:'99.99-99/99', onFocus: function(input, evt) {
+        $('#cb_alerts').text('Focus callback is called.');
+        $(this).css('background','#40FF3F');
+      }});
+      $('#cb_test_input_blur').setMask({mask:'99.99-99/99', onBlur: function(input, evt) {
+        $('#cb_alerts').text('Blur callback is called.');
+        $(this).css('background','#40FF3F');
+      }});
+    </script>
 
     <script>
         /*$('#cb_test_input').setMask({mask:'99.99-99/99', defaultValue: '000',

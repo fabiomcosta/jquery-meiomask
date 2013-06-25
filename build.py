@@ -44,7 +44,7 @@ class Builder:
         os.system('java -jar assets/yui-compressor/yui.jar --warn --charset utf8 ' + self.file_name + self.extension + ' > ' + self.file_name + '.' + self.minify_posfix + self.extension)
         print '** Succesfully created minified file. **'
 
-    def build(self, file_name, files, root='Source/'):
+    def build(self, file_name, files, root='source/'):
         self.file_name = file_name
         self.add_files('javascript_files', files, root=root, extension=self.extension)
 

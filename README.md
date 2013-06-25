@@ -45,6 +45,9 @@ and can play with them on the tests/visual-tests.html file.
 
 ## Changelog
 
+### v1.18
+* adding new callbacks onFocus and onBlur.
+
 ### v1.1.7
 * fixes errors related to $.browser, that was removed from jQuery.
 

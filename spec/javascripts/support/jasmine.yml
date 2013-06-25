@@ -1,5 +1,5 @@
 src_dir:
-  - 'lib/javascripts'
+  - 'assets/javascripts'
 
 spec_dir:
   - 'spec/javascripts'

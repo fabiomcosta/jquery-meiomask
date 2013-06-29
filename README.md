@@ -47,7 +47,6 @@ and can play with them on the tests/visual-tests.html file.
 * continuous integration
 * automated testing
 * responsive visual tests
-* jquery plugins published
 
 ### v1.1.10
 * Adding self to jQuery's plugin's repository http://plugins.jquery.com/

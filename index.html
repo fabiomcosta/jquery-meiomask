@@ -1,23 +1,316 @@
-<!DOCTYPE HTML>
-
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <title>meioMask Options</title>
-    </head>
-    <body>
-        <form action="tests/visual-tests.html" method="get">
-            <p><input type="text" name="version" value="1.7.2" /></p>
-            <p><input type="submit" value="Continue &rarr;"></p>
-        </form>
-
-        <form action="tests/tests.html" method="get">
-            <p><input type="text" name="version" value="1.7.2" /></p>
-            <p><input type="submit" value="Continue &rarr;"></p>
-        </form>
-
-        <script>
-            document.getElementsByTagName('input')[0].select();
-        </script>
-    </body>
+  <head>
+    <title>jQuery MeioMask - a jQuery plugin for masking text inputs</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="assets/javascripts/jquery-1.10.1.js"></script>
+    <script src="assets/javascripts/jquery.metadata.js"></script>
+    <script src="assets/javascripts/jquery.meio.mask.js"></script>
+    <script src="assets/javascripts/global.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link href="assets/stylesheets/global.css" rel="stylesheet">
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $(':input').setMask();
+        $('input[data-mask]').each(function() {
+          $(this).setMask($(this).data('mask'));
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <div class="navbar navbar-static-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="affixed-top icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand">jQuery MeioMask</a>
+            <div class="nav-collapse collapse">
+              <ul class="nav"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <ul class="nav nav-tabs nav-stacked affixed-top">
+            <li><a href="#1">Standalone<i class="icon-chevron-right pull-right "></i></a></li>
+            <li><a href="#2">Paste Feature<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#3">With Metadata Plugin<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#4">Change on-the-fly<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#5">The $.mask.string() Function<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#6">Applied to a Readonly Input<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#7">The Callbacks<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#8">Signed Reverse Masks<i class="icon-chevron-right pull-right"></i></a></li>
+            <li><a href="#9">Repeat mask type example<i class="icon-chevron-right pull-right"></i></a></li>
+          </ul>
+        </div>
+        <div class="span9">
+          <section class="affixed-top" id="1">
+            <h1>Standalone</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example form with defined masks</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Credit Card:</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Credit Card" id="credit_card" name="credit_card" alt="cc"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Time:</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Time" id="time" name="time" alt="time"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Decimal Number</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Decimal Number" id="decimal_number" name="decimal_number" alt="decimal"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Decimal Number: (with different attr)</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Decimal Number" id="decimal_number_data_mask" name="decimal_number_data_mask" data-mask="decimal"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Date</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Date" id="date" name="date" data-mask="date"/>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="2">
+            <h1>Paste Feature</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example form for the paste feature</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <div class="controls">
+                      <span class="help-block">copy: <b>1234567890</b> and paste at the input</span>
+                      <span class="help-block">copy: <b>(12) 3456-7890</b> and paste at the input</span>
+                      <span class="help-block">copy: <b>123abcdef4567890</b> and paste at the input</span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Phone</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Phone" id="phone" name="phone" alt="phone"/>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="3">
+            <h1>With Metadata Plugin</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example form with masks using metadata plugin</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask '555-666'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Metadata" id="metadata" name="metadata" class="{mask: '555-666'}" alt="(99) 666"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask '555-666'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Metadata" id="metadata" name="metadata" class="{mask: '555-666'}" alt="phone"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask '666-888'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Metadata" id="metadata" name="metadata" class="{mask: '666-888'}"/>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="4">
+            <h1>Change on-the-fly</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example form with the change-on-the-fly feature</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask '(99) 666'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Change on the Fly" id="change_on_the_fly" name="change_on_the_fly" alt="(99) 666" maxlength="10"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="controls">
+                      <p><button class="btn btn-mini btn-primary" type="button" name="change_fly_one">Change mask to '***.***'</button></p>
+                      <p><button class="btn btn-mini btn-primary" type="button" name="change_fly_second">Change mask to '(aaa) **-9999'</button></p>
+                      <p><button class="btn btn-mini btn-primary" type="button" name="change_fly_third">Unset the Mask</button></p>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="5">
+            <h1>The $.mask.string() Function</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example that shows the $.mask.string() function</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Entery any input</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Mask String" id="mask_string" name="mask_tring"/>
+                      <span class="help-inline" id="mask_string_span" name="mask_string_span"></span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <div class="controls">
+                      <p><button class="btn btn-mini btn-primary" type="button" name="mask_string_one">Mask input value to '99/99/99'</button></p>
+                      <p><button class="btn btn-mini btn-primary" type="button" name="mask_string_second">Mask input value to 'phone'</button></p>
+                      <p><button class="btn btn-mini btn-primary" type="button" name="mask_string_third">Mask input value to {mask: '999.999,999', type: 'reverse'}</button></p>
+                      <p><button class="btn btn-mini btn-primary" type="button" name="mask_string_fourth">Mask input value to 'signed-decimal'</button></p>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="6">
+            <h1>Applied to a Readonly Input</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example tahat shows a readonly input working as it should (some plugins break this!)</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask '999.999.999,99'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Applied to a Readonly" readonly="readonly" value="99999999999" id="applied_readonly" name="applied_readonly" alt="decimal"/>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="7">
+            <h1>The Callbacks</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example with a input and defined callbacks</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Invalid Character on Mask '99.99-99/99'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Invalid Character" id="invalid_character" name="invalid_character"/>
+                      <span class="help-inline" id="invalid_span"></span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Valid Character on Mask '99.99-99/99'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Valid Character" id="valid_character" name="valid_character"/>
+                      <span class="help-inline" id="valid_span"></span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Overflow on Mask '99.99-99/99'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Overflow" id="overflow" name="overflow"/>
+                      <span class="help-inline" id="overflow_span"></span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Focus on Mask '99.99-99/99'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Focus" id="focus" name="focus"/>
+                      <span class="help-inline" id="focus_span"></span>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Blur on Mask '99.99-99/99'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Blur" id="blur" name="blur"/>
+                      <span class="help-inline" id="blur_span"></span>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="8">
+            <h1>Signed Reverse Masks</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example with signed mask ('-' and '+' keys will change they're signal)</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask 'signed-decimal'</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Signed Decimal" id="signed_decimal" name="signed_decimal" alt="signed-decimal"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask 'signed-decimal' with negative value at input</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Signed Decimal Negative" value="-4445" id="signed_decimal" name="signed_decimal" alt="signed-decimal"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Mask '999.999,99', reverse, with defaultValue= '-000' (using metadata plugin)</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Reverse Metadata" id="reverse" name="reverse" class="{mask: '99,999.999', type: 'reverse', defaultValue: '-000'}"/>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="">Type Repeat</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Type Repeat" id="type_repeat" name="type_repeat" class="{mask: '9', type: 'repeat'}" maxlength="10"/>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+          <section id="9">
+            <h1>Repeat mask type example</h1>
+            <div class="well">
+              <fieldset>
+                <legend>Example with repeat mask type</legend>
+                <form class="form-horizontal">
+                  <div class="control-group">
+                    <label class="control-label" for="">Repeat</label>
+                    <div class="controls">
+                      <input type="text" placeholder="Repeat" id="repeat" name="repeat" maxlength="10" class="{mask: '9', type: 'repeat'}"/>
+                    </div>
+                  </div>
+                </form>
+              </fieldset>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="container-fluid">
+      </div>
+    </footer>
+  </body>
 </html>

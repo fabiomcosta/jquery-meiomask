@@ -4,11 +4,9 @@
 
 jQuery MeioMask - a jquery plugin for masking text inputs.
 
-## Maintainer needed
+## Maintainer
 
-A maintainer is needed for this project, unfortunately I don't have time to work on it anymore and I would be more
-than happy to point to a well maintained fork of the project.
-Just send me a message so we can figure this out.
+http://github.com/johnvoloski
 
 ## Dependencies
 
@@ -47,7 +45,13 @@ and can play with them on the tests/visual-tests.html file.
 
 ## Changelog
 
-### v1.18
+### v1.1.11
+* continuous integration
+* automated testing
+* responsive visual tests
+* jquery plugins published
+
+### v1.1.8
 * adding new callbacks onFocus and onBlur.
 
 ### v1.1.7

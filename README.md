@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/johnvoloski/jquery-meiomask.png?branch=master)](https://travis-ci.org/johnvoloski/jquery-meiomask)
-
 # jQuery MeioMask
 
 jQuery MeioMask - a jquery plugin for masking text inputs.
@@ -50,6 +48,9 @@ and can play with them on the tests/visual-tests.html file.
 * automated testing
 * responsive visual tests
 * jquery plugins published
+
+### v1.1.10
+* Adding self to jQuery's plugin's repository http://plugins.jquery.com/
 
 ### v1.1.8
 * adding new callbacks onFocus and onBlur.

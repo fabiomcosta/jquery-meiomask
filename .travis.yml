@@ -9,4 +9,5 @@ rvm:
 script: rake
 notifications:
   email:
+    - fabiomcosta@gmail.com
     - johnvoloski@gmail.com

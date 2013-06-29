@@ -114,7 +114,7 @@ Some details on how to contribute and stuff for maintainers of the project.
 
 Very simple:
 
-* After doing your changes on the `source/` files run `make` and
+* After doing your changes on the `assets/javascripts/` files run `rake test` and `rake build`
 the root files `jquery.meio.mask.js` and `jquery.meio.mask.min.js` are going to be update.
 * Update the `README.md` file with the new version number and it's list of changes. A list of changes
 can be easily generated from the url https://github.com/fabiomcosta/jquery-meiomask/compare/<previous-version>...master

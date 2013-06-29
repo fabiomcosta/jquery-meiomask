@@ -1,0 +1,16 @@
+/* BOOTSTRAP CONFIGURATION */
+
+/* Set background-color of NavBar, background-image to fix static color and filter to fix on ie static color  */
+div.navbar-inner { background-color: #333333 !important; background-image: none !important; filter: none !important; }
+/* Set font-size, color and text-shadow of links on NavBar */
+div.navbar .nav>li>a { font-size: 12px !important; color: #FFFFFF !important; text-shadow: none !important; }
+/* Set on a:hover links of NavBar no text-decoration */
+div.navbar .nav>li>a:hover { text-decoration: none !important; }
+/* Set on a:hover links of responsive NavBar no text-decoration, and background-color in onmouseover */
+div.navbar .in .nav>li>a:hover { text-decoration: none !important; background-color: #333333; }
+/* Set on btn of NavBar background-color and background-image to fix static color */
+div.navbar .btn-navbar { background-image: none; background-color: #333333 !important; }
+/* Fix Margin navbar */
+.affixed-top { margin-top: 30px !important; }
+/* Brand Color */
+.brand { color: #FFFFFF !important; float: right !important; }

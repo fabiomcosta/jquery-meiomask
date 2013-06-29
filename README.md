@@ -2,11 +2,9 @@
 
 jQuery MeioMask - a jquery plugin for masking text inputs.
 
-## Maintainer needed
+## Maintainer
 
-A maintainer is needed for this project, unfortunately I don't have time to work on it anymore and I would be more
-than happy to point to a well maintained fork of the project.
-Just send me a message so we can figure this out.
+http://github.com/johnvoloski
 
 ## Dependencies
 
@@ -44,6 +42,11 @@ You can see some demos inside the documentation at http://www.meiocodigo.com/pro
 and can play with them on the tests/visual-tests.html file.
 
 ## Changelog
+
+### v1.1.11
+* continuous integration
+* automated testing
+* responsive visual tests
 
 ### v1.1.10
 * Adding self to jQuery's plugin's repository http://plugins.jquery.com/
@@ -111,7 +114,7 @@ Some details on how to contribute and stuff for maintainers of the project.
 
 Very simple:
 
-* After doing your changes on the `source/` files run `make` and
+* After doing your changes on the `assets/javascripts/` files run `rake test` and `rake build`
 the root files `jquery.meio.mask.js` and `jquery.meio.mask.min.js` are going to be update.
 * Update the `README.md` file with the new version number and it's list of changes. A list of changes
 can be easily generated from the url https://github.com/fabiomcosta/jquery-meiomask/compare/<previous-version>...master

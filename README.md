@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/fabiomcosta/jquery-meiomask.png?branch=master)](https://travis-ci.org/fabiomcosta/jquery-meiomask)
+
 # jQuery MeioMask
 
 jQuery MeioMask - a jquery plugin for masking text inputs.

@@ -53,11 +53,12 @@
             webkit: /webkit/.test(navigator.userAgent.toLowerCase()),
             opera: /opera/.test(navigator.userAgent.toLowerCase()),
             msie: /msie/.test(navigator.userAgent.toLowerCase()),
+            android: (navigator.userAgent.toLowerCase().indexOf('mozilla/5.0') > -1 && navigator.userAgent.toLowerCase().indexOf('android ') > -1 && navigator.userAgent.toLowerCase().indexOf('applewebkit') > -1),
             version: uaMatch(navigator.userAgent)
         };
     }
 
-    var isIphone = (window.orientation != null);
+    var isMobile = (window.orientation != null);
 
     // browsers like firefox2 and before and opera doesnt have the onPaste event, but the paste feature can be done with the onInput event.
     var pasteEvent = (($.browser.opera || ($.browser.mozilla && parseFloat($.browser.version.substr(0,3)) < 1.9)) ? 'input' : 'paste');
@@ -127,7 +128,8 @@
                 224  : 'command'
             },
 
-            iphoneKeyRepresentation: {
+            mobileKeyRepresentation: {
+                8     : 'backspace',
                 10    : 'go',
                 127   : 'delete'
             },
@@ -186,7 +188,7 @@
                 if (!this.hasInit) {
 
                     var self = this, i,
-                        keyRep = (isIphone) ? this.iphoneKeyRepresentation : this.keyRepresentation;
+                        keyRep = (isMobile) ? this.mobileKeyRepresentation : this.keyRepresentation;
 
                     this.ignore = false;
 
@@ -715,7 +717,7 @@
 
             // adaptation from http://digitarald.de/project/autocompleter/
             __getRange: function(input) {
-                if (!$.browser.msie) return {start: input.selectionStart, end: input.selectionEnd};
+                if (!$.browser.msie && !$.browser.android) return {start: input.selectionStart, end: input.selectionEnd};
                 var pos = {start: 0, end: 0},
                     range = document.selection.createRange();
                 pos.start = 0 - range.duplicate().moveStart('character', -100000);

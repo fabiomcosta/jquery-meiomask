@@ -284,6 +284,7 @@
                             .bind('keypress.mask', {func:maskObj._onKeyPress, thisObj:maskObj}, maskObj._onMask)
                             .bind('keyup.mask', {func:maskObj._onKeyUp, thisObj:maskObj}, maskObj._onMask)
                             .bind('paste.mask', {func:maskObj._onPaste, thisObj:maskObj}, maskObj._onMask)
+                            .bind('drop.mask', {func:maskObj._onPaste, thisObj:maskObj}, maskObj._onMask)
                             .bind('focus.mask', maskObj._onFocus)
                             .bind('blur.mask', maskObj._onBlur)
                             .bind('change.mask', maskObj._onChange);
@@ -394,7 +395,7 @@
                     var rep = this.keyRep[o.nKey];
                     o.data.onValid.call(o._this, rep || '', o.nKey);
                 }
-                return isIphone ? this._onKeyPress(e, o) : true;
+                return isMobile ? this._onKeyPress(e, o) : true;
             },
 
             _onKeyUp: function(e, o) {

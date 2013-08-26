@@ -127,10 +127,7 @@
                 224  : 'command'
             },
 
-            iphoneKeyRepresentation: {
-                10    : 'go',
-                127   : 'delete'
-            },
+            
 
             signals: {
                 '+' : '',
@@ -186,7 +183,7 @@
                 if (!this.hasInit) {
 
                     var self = this, i,
-                        keyRep = (isIphone) ? this.iphoneKeyRepresentation : this.keyRepresentation;
+                        keyRep = this.keyRepresentation;
 
                     this.ignore = false;
 

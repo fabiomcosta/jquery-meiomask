@@ -128,12 +128,6 @@
                 224  : 'command'
             },
 
-            mobileKeyRepresentation: {
-                8     : 'backspace',
-                10    : 'go',
-                127   : 'delete'
-            },
-
             signals: {
                 '+' : '',
                 '-' : '-'
@@ -188,7 +182,7 @@
                 if (!this.hasInit) {
 
                     var self = this, i,
-                        keyRep = (isMobile) ? this.mobileKeyRepresentation : this.keyRepresentation;
+                        keyRep = this.keyRepresentation;
 
                     this.ignore = false;
 

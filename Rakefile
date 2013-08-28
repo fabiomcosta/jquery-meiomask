@@ -16,7 +16,9 @@ task :build do
   # Generate Full Version
   FileUtils.cp "assets/javascripts/jquery.meio.mask.js", "jquery.meio.mask.js"
   # Generate Minified Version
-  File.open("jquery.meio.mask.min.js", "w") do |file| file.write Uglifier.new.compile(File.read("assets/javascripts/jquery.meio.mask.js")) end
+  File.open("jquery.meio.mask.min.js", "w") do |file|
+    file.write Uglifier.new.compile(File.read("jquery.meio.mask.js"))
+  end
 end
 
 # Default

@@ -384,7 +384,7 @@
 
             _onKeyDown: function(e,o) {
                 // lets say keypress at desktop == keydown at iphone (theres no keypress at iphone)
-                this.ignore = $.inArray(o.nKey, this.ignoreKeys) > -1 || e.ctrlKey || e.metaKey || e.altKey;
+                this.ignore = $.inArray(o.nKey, this.ignoreKeys) > -1 || ((e.ctrlKey || e.metaKey || e.altKey) && e.key);
                 if (this.ignore) {
                     var rep = this.keyRep[o.nKey];
                     o.data.onValid.call(o._this, rep || '', o.nKey);

@@ -635,6 +635,24 @@
                     if ( maskArray[i] && fixedCharsReg.test(maskArray[i]))
                         valueArray.splice(i, 0, maskArray[i]);
                 }
+                valueArray = this.__checkSuffixMask(valueArray, maskArray, i, fixedCharsReg);
+                return valueArray;
+            },
+
+            // check if suffix from position is formed only by fixedchars @see issue 44
+            __checkSuffixMask: function(valueArray, maskArray, position, fixedCharsReg) {
+                var suffix = maskArray.slice(0).splice(position);
+                if (suffix.length) {
+                    found = true;
+                    for (var i in suffix) {
+                        found = found && fixedCharsReg.test(suffix[i]);
+                    }
+                    if (found) {
+                        for (var i in suffix) {
+                            valueArray.push(suffix[i]);
+                        }
+                    }
+                }
                 return valueArray;
             },
 

@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/fabiomcosta/jquery-meiomask.png?branch=master)](https://travis-ci.org/fabiomcosta/jquery-meiomask)
+[![Code Climate](https://codeclimate.com/github/fabiomcosta/jquery-meiomask.png)](https://codeclimate.com/github/fabiomcosta/jquery-meiomask)
 
 # jQuery MeioMask
 

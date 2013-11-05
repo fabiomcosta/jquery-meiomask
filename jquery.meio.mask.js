@@ -135,7 +135,7 @@
 
             // default settings for the plugin
             options: {
-                attr: 'alt', // an attr to look for the mask name or the mask itself
+                attr: 'data-mask', // an attr to look for the mask name or the mask itself
                 mask: null, // the mask to be used on the input
                 type: 'fixed', // the mask of this mask
                 maxLength: -1, // the maxLength of the mask
@@ -158,8 +158,8 @@
 
             // masks. You may add yours!
             // Ex: $.fn.setMask.masks.msk = {mask: '999'}
-            // and then if the 'attr' options value is 'alt', your input should look like:
-            // <input type="text" name="some_name" id="some_name" alt="msk" />
+            // and then if the 'attr' options value is 'data-mask', your input should look like:
+            // <input type="text" name="some_name" id="some_name" data-mask="msk" />
             masks: {
                 'phone'             : {mask: '(99) 9999-9999' },
                 'phone-us'          : {mask: '(999) 999-9999' },

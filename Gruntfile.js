@@ -3,7 +3,7 @@
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('meiomask.json'),
+    pkg: grunt.file.readJSON('package.json'),
     concat: {
       build: {
         src:  ['src/<%= pkg.name %>.js'],

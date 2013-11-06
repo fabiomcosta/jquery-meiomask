@@ -18,9 +18,9 @@ module.exports = function(grunt) {
     },
     jasmine: {
       pivotal: {
-        src: ['src/<%= pkg.name %>.js', 'spec/'],
+        src: ['src/<%= pkg.name %>.js', 'spec/javascripts/helpers', 'spec/javascripts/fixtures'],
         options: {
-          specs: 'spec/*_spec.js',
+          specs: 'spec/javascripts/*_spec.js',
           helpers: 'spec/javascripts/helpers/*.js'
         }
       }
@@ -36,5 +36,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['concat', 'uglify']);
 
   // Test Task(s)
-  grunt.registerTask('test', ['']);
+  grunt.registerTask('test', ['jasmine']);
 };

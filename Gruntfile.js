@@ -27,4 +27,7 @@ module.exports = function(grunt) {
 
   // Travis CI
   grunt.registerTask('travis', ['build']);
+
+  // Default Task(s)
+  grunt.registerTask('default', ['build']);
 };

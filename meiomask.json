@@ -1,0 +1,17 @@
+{
+  "name": "meiomask",
+  "version": "1.1.11",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "build": "grunt build"
+  },
+  "devDependencies": {
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-jasmine": "~0.5.2",
+    "grunt": "~0.4.1"
+  }
+}

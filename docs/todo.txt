@@ -1,0 +1,73 @@
+TODO FEATURES:
+
+1.1.1 Bugs:
+* defaultValue is not set and should be, on initialization, so the reset button works properly; OK!
+* Next form element should be visible. (offsetWidth and height > 0);
+* âêô are not in the @ rule; OK!
+* set the size of the input, as an option. OK!
+
+
+* allow a default value to be at the input if you try to delete everything; OK!
+* a callback should be called when you input something that is incorrect, something is correct and the mask is full; OK!
+* make a function that will mask a string just like it does with the inputs; OK!
+* allow the setMask function to be used as setMask({mask:"3213",type:"reverse"}) and stuff. OK!
+* the value from the input will be masked at the time it's applied; OK!
+* allow negative numbers to be written on number masks. OK
+* iphone support -- OK, TESTAR NOVAMENTE
+* set the signal at the default value, not at a new option. Will be easier to setup and when you need a number with signal you'll always
+need a default value, althoug you could have '-' as the input value... it would look weird. OK
+
+* FIX: 'phone-us' mask is now '(999) 999-9999';
+* CHANGE: change the 'infinite' mask name to 'repeat'; OK!
+* NEW: let 'repeat' have a maxLength; OK!
+* NEW: auto-tab focus form element from next form; OK! cool!
+* NEW: allow auto-tab, to focus the next form element when the input is completely filled; OK!
+* NEW: let the next input to be focused by auto-tab be selectable by a css selector; OK!
+* DEPRECATE: deprecated unmaskedVal. This function is too buggy... works for most cases but not all. The best way to do it is by doing it yourself. OK
+* FIX: fire the change event on reverse mask; OK
+* NEW: let masks have they're own fixedChars option, to give more flexibility; OK
+* fix usability bug that prevent correct character from being inputted;
+
+
+Changelog:
+
+<h3>Changelog</h3>
+v1.1
+<ul>
+	<li>Mask type 'infinite' is now called 'repeat' (using 'infinite' still works but it is deprecated). It now allows a maxLenght value to be set. MaxLength can be setted by the maxLength attribute or the maxLength option;</li>
+	<li>You can easily set an auto-tab option that will focus the next form element when the masked input is totaly filled. It is true by default but you can put a jQuery selector string to match the next element you want to be focused.</li>
+	<li>Deprecated 'unmaskVal' function. This function is too buggy... works for most cases but not all. The best way to unmask a value is by doing it yourself;</li>
+	<li>'phone-us' mask is now '(999) 999-9999';</li>
+	<li>Correctly fires the onChange event on reverse masked inputs.</li>
+</ul>
+v1.0.4
+<ul>
+	<li>New mask type 'infinite', it allows infinite values at masks. See demos for a better understanding;</li>
+	<li>Added new function 'unmaskVal' that returns the input value without the mask. See demos for a better understanding;</li>
+	<li>Removed a serious bug at IE that was fixing the caret at the end of the input;</li>
+</ul>
+V1.0.3
+<ul>
+	<li>Callback functions now receive the char number as it second parameter, so it is possible to detect exactly which key has been pressed;</li>
+	<li>added the signed masks. It only works with the reverse mask. See demos for more details;</li>
+	<li>iPhone support improved. iPhone now works 100% better than the 1.0.2 version. I'ts logic have been changed, and now it's working with full features. :P</li>
+</ul>
+v1.0.2
+<ul>
+	<li>added input callbacks: onInvalid, onValid and onOverflow;</li>
+	<li>added support for default values;</li>
+	<li>can now be used like $().setMask({});</li>
+	<li>added the function $.mask.string(string,mask) that will mask a string (see demos);</li>
+	<li>now the value of the input is masked at the time the mask is applyed to it.</li>
+</ul>
+v1.0.1
+<ul>
+	<li>added support for iphone;</li>
+	<li>removed a bug where a fixed char would be replaced by an inputed one.</li>
+</ul>
+v1.0
+<ul>
+	<li>initial release.</li>
+</ul>
+
+http://www.meiocodigo.com/2008/09/29/meiomask-jquery-form-mask-input-plugin/,http://www.meiocodigo.com/2008/09/29/meiomask-101-version-released/,http://www.meiocodigo.com/2008/09/20/meiomask-a-jquery-plugin-for-masking-inputs/

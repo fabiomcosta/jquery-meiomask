@@ -3,17 +3,26 @@
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
-    pkg: grunt.file.readJSON('meiomask.jquery.json'),
+    pkg: grunt.file.readJSON('meiomask.json'),
     concat: {
       build: {
         src:  ['src/<%= pkg.name %>.js'],
-        dest: '<%= pkg.name %>.js'
+        dest: 'dist/<%= pkg.name %>.js'
       }
     },
     uglify: {
       build: {
-        src:  '<%= pkg.name %>.js',
-        dest: '<%= pkg.name %>.min.js'
+        src:  'dist/<%= pkg.name %>.js',
+        dest: 'dist/<%= pkg.name %>.min.js'
+      }
+    },
+    jasmine: {
+      pivotal: {
+        src: ['src/<%= pkg.name %>.js', 'spec/'],
+        options: {
+          specs: 'spec/*_spec.js',
+          helpers: 'spec/javascripts/helpers/*.js'
+        }
       }
     }
   });
@@ -21,8 +30,11 @@ module.exports = function(grunt) {
   // Loaded Plugins
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  //grunt.loadNpmTasks('grunt-contrib-jasmine');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-  // Default Task(s)
-  grunt.registerTask('default', ['concat', 'uglify'])
+  // Build Task(s)
+  grunt.registerTask('build', ['concat', 'uglify']);
+
+  // Test Task(s)
+  grunt.registerTask('test', ['']);
 };

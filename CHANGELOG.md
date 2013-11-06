@@ -1,3 +1,10 @@
+### v1.1.12
+* change continuous integration to Grunt
+* remove ruby and jasmine
+* split README file into four new archives `AUTHORS`, `CHANGELOG`, `CONTRIBUTING`, and `LICENCE-MIT`
+* bug fixes
+* adding codeclimate
+
 ### v1.1.11
 * continuous integration
 * automated testing

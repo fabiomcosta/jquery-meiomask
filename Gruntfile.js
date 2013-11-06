@@ -37,4 +37,7 @@ module.exports = function(grunt) {
 
   // Test Task(s)
   grunt.registerTask('test', ['jasmine']);
+
+  // Travis CI
+  grunt.registerTask('travis', ['jasmine']);
 };

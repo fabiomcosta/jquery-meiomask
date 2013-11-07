@@ -1,3 +1,5 @@
 /node_modules/
 _SpecRunner.html
 .grunt/
+*~
+.DS_Store

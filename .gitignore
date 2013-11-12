@@ -1,1 +1,5 @@
-.jhw-cache.jhw*.DS_Store
+/node_modules/
+_SpecRunner.html
+.grunt/
+*~
+.DS_Store

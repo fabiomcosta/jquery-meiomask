@@ -21,6 +21,10 @@ http://github.com/johnvoloski
 <br/>or<br/>
 `<script src="bower_components/jquery-meiomask/dist/meiomask.min.js" type="text/javascript"></script>`
 
+## Install via Rails
+
+See [meiomask-rails gem](https://github.com/johnvoloski/meiomask-rails).
+
 ## Dependencies
 
 The only dependency is jQuery itself.

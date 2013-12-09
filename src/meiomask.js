@@ -434,7 +434,7 @@
                     var rep = this.keyRep[o.nKey];
                     o.data.onValid.call(o._this, rep || '', o.nKey);
                 }
-                return isMobile ? this._onKeyPress(e, o) : true;
+                return true;
             },
 
             _onKeyUp: function(e, o) {

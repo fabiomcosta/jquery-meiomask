@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.12
+ * @version: 1.1.13
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -434,7 +434,7 @@
                     var rep = this.keyRep[o.nKey];
                     o.data.onValid.call(o._this, rep || '', o.nKey);
                 }
-                return isMobile ? this._onKeyPress(e, o) : true;
+                return true;
             },
 
             _onKeyUp: function(e, o) {

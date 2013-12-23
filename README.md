@@ -12,9 +12,9 @@ http://github.com/johnvoloski
 ## Install via Bower
 
 * Latest version:           `$ bower install jquery-meiomask`
-* Install specific version: `$ bower install jquery-meiomask#~1.1.12`
+* Install specific version: `$ bower install jquery-meiomask#~1.1.13`
 * Or put in `bower.json`:
-  <br/>`"jquery-meiomask": "~1.1.12"`
+  <br/>`"jquery-meiomask": "~1.1.13"`
   <br/>`$ bower install`
 * Include script within HTML: 
 `<script src="bower_components/jquery-meiomask/dist/meiomask.js" type="text/javascript"></script>`
@@ -33,7 +33,7 @@ The only dependency is jQuery itself.
 <html>
   <head>
     <script src="jquery-1.10.2.js"></script>
-    <script src="jquery.meio.mask.min.js"></script>
+    <script src="meiomask.min.js"></script>
   </head>
 
   <body>

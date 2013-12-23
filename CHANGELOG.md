@@ -1,3 +1,6 @@
+### v1.1.13
+* Bug fix
+
 ### v1.1.12
 * change continuous integration to Grunt
 * remove ruby and jasmine

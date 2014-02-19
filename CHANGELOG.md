@@ -1,3 +1,5 @@
+### v1.1.14
+*Bug fix for the constant press  backspace for the date masking
 ### v1.1.13
 * Bug fix
 

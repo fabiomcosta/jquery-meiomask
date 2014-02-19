@@ -442,7 +442,41 @@
                 //this is a little bug, when you go to an input with tab key
                 //it would remove the range selected by default, and that's not a desired behavior
                 if (o.nKey === 9 || o.nKey === 16) return true;
-
+                
+                 * Fix the digit shifting in the masking for the Date, the reason is the value array get lesser than the default array length
+				 * cause the array miss match!!!
+				 * 
+				 * author:  HaiWei Wang
+				 */
+				
+				if((o.nKey==8||o.nKey==46) && o.data.mask=='MN/DE/9999'){
+					var target= o.range.start;
+					var defaultValue = o.data.defaultValue;
+					var defaultArray = defaultValue.split("");
+					
+					var actualArray = o.valueArray;
+					var temp =[];
+					defaultArray.splice(2,0,"/");
+					defaultArray.splice(5,0,"/");
+					
+					if(defaultArray.length != actualArray.length){
+						
+						for(var i=0; i<actualArray.length ; i++){
+							if(target==i){
+								
+								temp.push(defaultArray[i]);
+								for(var j=i; j<actualArray.length ; j++){
+									temp.push(actualArray[j]);
+								}
+							
+								o.valueArray = temp;
+								break;
+							}else{
+								temp.push(actualArray[i]);
+							}
+						}
+					}
+				}
                 if (o.repeat) {
                     this.__autoTab(o);
                     return true;

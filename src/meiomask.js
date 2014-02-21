@@ -441,7 +441,7 @@
                 //9=TAB_KEY 16=SHIFT_KEY
                 //this is a little bug, when you go to an input with tab key
                 //it would remove the range selected by default, and that's not a desired behavior
-                if (o.nKey === 9 || o.nKey === 16) return true;
+                if (o.nKey === 9 || o.nKey === 16 || this.ignore) return true;
 
                 if (o.repeat) {
                     this.__autoTab(o);

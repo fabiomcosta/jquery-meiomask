@@ -1,3 +1,5 @@
+### v1.1.14
+* ignore keys defined in keyRepresentation to allow cursor positioning
 ### v1.1.13
 * Bug fix
 

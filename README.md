@@ -12,9 +12,9 @@ http://github.com/johnvoloski
 ## Install via Bower
 
 * Latest version:           `$ bower install jquery-meiomask`
-* Install specific version: `$ bower install jquery-meiomask#~1.1.13`
+* Install specific version: `$ bower install jquery-meiomask#~1.1.14`
 * Or put in `bower.json`:
-  <br/>`"jquery-meiomask": "~1.1.13"`
+  <br/>`"jquery-meiomask": "~1.1.14"`
   <br/>`$ bower install`
 * Include script within HTML: 
 `<script src="bower_components/jquery-meiomask/dist/meiomask.js" type="text/javascript"></script>`

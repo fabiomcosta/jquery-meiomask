@@ -1,4 +1,4 @@
-Copyright (c) 2008-2013 Fábio M. Costa fabiomcosta@gmail.com, and contributors
+Copyright (c) 2008-2014 Fábio M. Costa fabiomcosta@gmail.com, and contributors
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation

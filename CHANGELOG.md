@@ -1,3 +1,6 @@
+## v1.1.14
+* Organizing versions and adding to cdnjs
+
 ### v1.1.13
 * Bug fix
 

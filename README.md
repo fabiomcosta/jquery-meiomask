@@ -9,6 +9,10 @@ jQuery MeioMask - a jquery plugin for masking text inputs.
 
 http://github.com/johnvoloski
 
+## CDN
+
+  See [http://cdnjs.com/libraries/jquery.meiomask](http://cdnjs.com/libraries/jquery.meiomask).
+
 ## Install via Bower
 
 * Latest version:           `$ bower install jquery-meiomask`

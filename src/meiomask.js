@@ -43,11 +43,12 @@
             return match[2] || '0';
         };
 
+        var isIE11 = function () { return ((navigator.appName == 'Microsoft Internet Explorer') || ((navigator.appName == 'Netscape') && (new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})").exec(navigator.userAgent) != null))); };
         $.browser = {
             mozilla: /mozilla/.test(navigator.userAgent.toLowerCase()) && !/webkit/.test(navigator.userAgent.toLowerCase()),
             webkit: /webkit/.test(navigator.userAgent.toLowerCase()),
             opera: /opera/.test(navigator.userAgent.toLowerCase()),
-            msie: /msie/.test(navigator.userAgent.toLowerCase()),
+            msie: /msie/.test(navigator.userAgent.toLowerCase()) || isIE11(),
             android: (navigator.userAgent.toLowerCase().indexOf('mozilla/5.0') > -1 && navigator.userAgent.toLowerCase().indexOf('android ') > -1 && navigator.userAgent.toLowerCase().indexOf('applewebkit') > -1),
             version: uaMatch(navigator.userAgent)
         };
@@ -465,7 +466,14 @@
                 o.data.fixedCharsReg,
                 o.data.signal);
 
+                //store the old caret position
+                var caretOldPosition = o.$this.caret()
+
+                //put a value on control
                 o.$this.val($thisVal);
+
+                //put(recover) the old caret position 
+                o.$this.caret(caretOldPosition);
                 // this makes the caret stay at first position when
                 // the user removes all values in an input and the plugin adds the default value to it (if it haves one).
                 if (!o.reverse && o.data.defaultValue.length && (o.range.start === o.range.end)) this.__setRange(o._this, o.range.start, o.range.end);
@@ -768,4 +776,85 @@
             return $.mask.unmaskedVal(this[0]);
         }
     });
-})(jQuery);
+
+    // caret function got on github: https://github.com/accursoft/caret.git
+    $.fn.caret = function (pos) {
+        var target = this[0];
+        var isContentEditable = target.contentEditable === 'true';
+        //get
+        if (arguments.length == 0) {
+            //HTML5
+            if (window.getSelection) {
+                //contenteditable
+                if (isContentEditable) {
+                    target.focus();
+                    var range1 = window.getSelection().getRangeAt(0),
+                        range2 = range1.cloneRange();
+                    range2.selectNodeContents(target);
+                    range2.setEnd(range1.endContainer, range1.endOffset);
+                    return range2.toString().length;
+                }
+                //textarea
+                return target.selectionStart;
+            }
+            //IE<9
+            if (document.selection) {
+                target.focus();
+                //contenteditable
+                if (isContentEditable) {
+                    var range1 = document.selection.createRange(),
+                        range2 = document.body.createTextRange();
+                    range2.moveToElementText(target);
+                    range2.setEndPoint('EndToEnd', range1);
+                    return range2.text.length;
+                }
+                //textarea
+                var pos = 0,
+                    range = target.createTextRange(),
+                    range2 = document.selection.createRange().duplicate(),
+                    bookmark = range2.getBookmark();
+                range.moveToBookmark(bookmark);
+                while (range.moveStart('character', -1) !== 0) pos++;
+                return pos;
+            }
+            // Addition for jsdom support
+            if (target.selectionStart)
+                return target.selectionStart;
+            //not supported
+            return 0;
+        }
+        //set
+        if (pos == -1)
+            pos = this[isContentEditable ? 'text' : 'val']().length;
+        //HTML5
+        if (window.getSelection) {
+            //contenteditable
+            if (isContentEditable) {
+                target.focus();
+                window.getSelection().collapse(target.firstChild, pos);
+            }
+                //textarea
+            else
+                target.setSelectionRange(pos, pos);
+        }
+            //IE<9
+        else if (document.body.createTextRange) {
+            if (isContentEditable) {
+                var range = document.body.createTextRange();
+                range.moveToElementText(target);
+                range.moveStart('character', pos);
+                range.collapse(true);
+                range.select();
+            } else {
+                var range = target.createTextRange();
+                range.move('character', pos);
+                range.select();
+            }
+        }
+        if (!isContentEditable)
+            target.focus();
+        return pos;
+    }
+
+
+})(jQuery); 

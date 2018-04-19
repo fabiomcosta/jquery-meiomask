@@ -1,7 +1,7 @@
 /**
  * jquery.meio.mask.js
  * @author: fabiomcosta
- * @version: 1.1.14
+ * @version: 1.1.15
  *
  * Created by Fabio M. Costa on 2008-09-16. Please report any bug at http://www.meiocodigo.com
  *
@@ -138,7 +138,9 @@
                 selectCharsOnFocus: true, // select all chars from input on its focus
                 autoTab: true, // auto focus the next form element when you type the mask completely
                 setSize: false, // sets the input size based on the length of the mask (work with fixed and reverse masks only)
-                fixedChars: '[(),.:/ -]', // fixed chars to be used on the masks. You may change it for your needs!
+                fixedChars: '[(),.:/ -]', // fixed chars to be used on the masks. You may change it for your needs!,
+                replacing: '',
+                replacements: '',
 
                 onInvalid: function() {},
                 onValid: function() {},
@@ -380,7 +382,10 @@
                 o.maxLength,
                 o.defaultValue,
                 fixedCharsReg,
-                o.signal);
+                o.signal,
+                null,
+                o.replacing,
+                o.replacements);
             },
 
             // all the 3 events below are here just to fix the change event on reversed masks.
@@ -463,7 +468,10 @@
                 o.data.maxLength,
                 o.data.defaultValue,
                 o.data.fixedCharsReg,
-                o.data.signal);
+                o.data.signal,
+                null,
+                o.data.replacing,
+                o.data.replacements);
 
                 o.$this.val($thisVal);
                 // this makes the caret stay at first position when
@@ -488,10 +496,21 @@
 
                 var c = String.fromCharCode(o.nKey),
                     rangeStart = o.range.start,
+                    rangeEnd = o.range.end,
+                    wasReplaced = false,
+                    selectionWasCollapsed = false,
                     rawValue = o.value,
                     maskArray = o.data.maskArray;
 
-                if (o.reverse) {
+                if (o.data.replacing && o.data.replacements) {
+                    var idx = o.data.replacing.indexOf(c);
+
+                    if (idx >= 0) {
+                        c = o.data.replacements[idx];
+                        rawValue = rawValue.substr(0, rangeStart) + c + rawValue.substr(rangeEnd, rawValue.length);
+                        wasReplaced = true;
+                    }
+                } else if (o.reverse) {
                     // the input value from the range start to the value start
                     var valueStart = rawValue.substr(0, rangeStart),
                         // the input value from the range end to the value end
@@ -503,6 +522,9 @@
                     if (o.data.signal && (rangeStart - o.data.signal.length > 0)) {
                         rangeStart -= o.data.signal.length;
                     }
+                } else if (rangeStart != rangeEnd) {
+                    selectionWasCollapsed = true;
+                    rawValue = rawValue.substr(0, rangeStart) + c + rawValue.substr(rangeEnd, rawValue.length);
                 }
 
                 var valueArray = rawValue.replace(o.data.fixedCharsRegG, '').split(''),
@@ -540,13 +562,19 @@
                 o.data.defaultValue,
                 o.data.fixedCharsReg,
                 o.data.signal,
-                extraPos);
+                extraPos,
+                o.data.replacing,
+                o.data.replacements);
 
                 if (!o.repeat) {
                     o.$this.val($thisVal);
                 }
 
-                return (o.reverse) ? this._keyPressReverse(e, o) : (o.fixed) ? this._keyPressFixed(e, o) : true;
+                if (wasReplaced || selectionWasCollapsed) {
+                    this.__setRange(o._this, o.range.start + 1, o.range.start + 1);
+                }
+
+                return (o.reverse) ? this._keyPressReverse(e, o) : (o.fixed) ? this._keyPressFixed(e, o) : !(wasReplaced || selectionWasCollapsed);
             },
 
             _keyPressFixed: function(e, o) {
@@ -600,8 +628,11 @@
 
             // this function is totaly specific to be used with this plugin, youll never need it
             // it gets the array representing an unmasked string and masks it depending on the type of the mask
-            __maskArray: function(valueArray, maskNonFixedCharsArray, maskArray, type, maxlength, defaultValue, fixedCharsReg, signal, extraPos) {
+            __maskArray: function(valueArray, maskNonFixedCharsArray, maskArray, type, maxlength, defaultValue, fixedCharsReg, signal, extraPos, replacing, replacements) {
                 if (type === 'reverse') valueArray.reverse();
+                if (replacing && replacements) {
+                    valueArray = this.__replaceChars(valueArray, replacing, replacements)
+                }
                 valueArray = this.__removeInvalidChars(valueArray, maskNonFixedCharsArray, type === 'repeat' || type === 'infinite');
                 if (defaultValue) valueArray = this.__applyDefaultValue.call(valueArray, defaultValue);
                 valueArray = this.__applyMask(valueArray, maskArray, extraPos, fixedCharsReg);
@@ -653,6 +684,21 @@
                 return valueArray;
             },
 
+            __replaceChars: function(valueArray, replacing, replacements) {
+                return (
+                    valueArray
+                        .map(function (char) {
+                            var idx = replacing.indexOf(char);
+
+                            if (idx >= 0) {
+                                char = replacements[idx];
+                            }
+
+                            return char;
+                        })
+                );
+            },
+
             // Apply the current input mask to the valueArray and returns it.
             __applyMask: function(valueArray, maskArray, plus, fixedCharsReg) {
                 if (typeof plus == 'undefined') plus = 0;
@@ -673,40 +719,43 @@
             },
 
             __getNextInput: function(input, selector) {
-                var form = input.form;
+                try {
+                    var form = input.form;
 
-                if (form == null) {
-                    return null;
-                }
-
-                var formEls = form.elements,
-                    initialInputIndex = $.inArray(input, formEls) + 1,
-                    len = formEls.length,
-                    $input = null,
-                    i;
-
-                // look for next input on the form of the pased input
-                for (i = initialInputIndex; i < len; i++) {
-                    $input = $(formEls[i]);
-                    if (this.__isNextInput($input, selector)) {
-                        return $input;
+                    if (form == null) {
+                        return null;
                     }
-                }
 
-                var forms = document.forms,
-                    initialFormIndex = $.inArray(input.form, forms) + 1,
-                    y, tmpFormEls, _len = forms.length;
-                // look for the next forms for the next input
-                for (y = initialFormIndex; y < _len; y++) {
-                    tmpFormEls = forms[y].elements;
-                    len = tmpFormEls.length;
-                    for (i = 0; i < len; i++) {
-                        $input = $(tmpFormEls[i]);
+                    var formEls = form.elements,
+                        initialInputIndex = $.inArray(input, formEls) + 1,
+                        len = formEls.length,
+                        $input = null,
+                        i;
+
+                    // look for next input on the form of the pased input
+                    for (i = initialInputIndex; i < len; i++) {
+                        $input = $(formEls[i]);
                         if (this.__isNextInput($input, selector)) {
                             return $input;
                         }
                     }
-                }
+
+                    var forms = document.forms,
+                        initialFormIndex = $.inArray(input.form, forms) + 1,
+                        y, tmpFormEls, _len = forms.length;
+                    // look for the next forms for the next input
+                    for (y = initialFormIndex; y < _len; y++) {
+                        tmpFormEls = forms[y].elements;
+                        len = tmpFormEls.length;
+                        for (i = 0; i < len; i++) {
+                            $input = $(tmpFormEls[i]);
+                            if (this.__isNextInput($input, selector)) {
+                                return $input;
+                            }
+                        }
+                    }
+                } catch(e) {}
+
                 return null;
             },
 

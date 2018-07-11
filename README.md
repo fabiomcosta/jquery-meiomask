@@ -1,4 +1,5 @@
 # Warning: Unmaintained project
+
 If you are interested on maintaining the project feel encouraged to message me so I can give you some instructions and most importantly, admin access.
 
 [![Build Status](https://travis-ci.org/fabiomcosta/jquery-meiomask.png?branch=master)](https://travis-ci.org/fabiomcosta/jquery-meiomask)
@@ -37,6 +38,8 @@ See [meiomask-rails gem](https://github.com/johnvoloski/meiomask-rails).
 The only dependency is jQuery itself.
 
 ## How to use
+
+```js
 <html>
   <head>
     <script src="jquery-1.10.2.js"></script>
@@ -57,6 +60,7 @@ The only dependency is jQuery itself.
     </script>
   </body>
 </html>
+```
 
 ## Documentation
 

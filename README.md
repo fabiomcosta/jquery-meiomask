@@ -61,12 +61,3 @@ The only dependency is jQuery itself.
   </body>
 </html>
 ```
-
-## Documentation
-
-http://www.meiocodigo.com/projects/meiomask/
-
-## Demos
-
-You can see some demos inside the documentation at http://www.meiocodigo.com/projects/meiomask/#mm_demos
-and can play with them on the tests/visual-tests.html file.

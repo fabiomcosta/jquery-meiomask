@@ -8,9 +8,9 @@
     "build": "grunt build"
   },
   "devDependencies": {
-    "grunt-jasmine-runner": "~0.6.0",
+    "grunt": "^1.0.3",
     "grunt-contrib-concat": "~0.3.0",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt": "~0.4.1"
+    "grunt-contrib-uglify": "^3.3.0",
+    "grunt-jasmine-runner": "~0.6.0"
   }
 }

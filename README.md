@@ -24,7 +24,7 @@ http://github.com/johnvoloski
 * Or put in `bower.json`:
   <br/>`"jquery-meiomask": "~1.1.14"`
   <br/>`$ bower install`
-* Include script within HTML: 
+* Include script within HTML:
 `<script src="bower_components/jquery-meiomask/dist/meiomask.js" type="text/javascript"></script>`
 <br/>or<br/>
 `<script src="bower_components/jquery-meiomask/dist/meiomask.min.js" type="text/javascript"></script>`

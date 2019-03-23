@@ -5,7 +5,7 @@
     "build": "grunt build"
   },
   "devDependencies": {
-    "grunt": "^1.0.3",
+    "grunt": "^1.0.4",
     "grunt-contrib-concat": "~0.3.0",
     "grunt-contrib-uglify": "^3.4.0",
     "grunt-jasmine-runner": "~0.6.0"
